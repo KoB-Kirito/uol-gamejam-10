@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cu1ptxp2px5uq"]
+
+[ext_resource type="PackedScene" uid="uid://d1nwfcr0d5o1x" path="res://player.tscn" id="1_m36mq"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_m36mq")]
+friction = 0.3
+acceleration = 0.4
