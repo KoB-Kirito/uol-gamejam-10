@@ -29,7 +29,8 @@ func _physics_process(delta):
 	else:
 		velocity = velocity.lerp(Vector2.ZERO, friction)
 	move_and_slide()
-	if Input.is_action_just_pressed("shoot") and !hasShot:
+	
+	if Input.is_action_just_pressed("shoot") :#&& !hasShot:
 		# Knockback
 		var r = gun.rotation + PI
 		velocity += Vector2(cos(r), sin(r)) * knockback
@@ -41,3 +42,5 @@ func _physics_process(delta):
 		get_parent().add_child(b)
 		b.position = gun.tip.global_position
 		b.rotation = gun.rotation
+		
+		b.launch()

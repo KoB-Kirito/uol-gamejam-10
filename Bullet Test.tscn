@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://bunl221tmjvo2"]
+
+[ext_resource type="Texture2D" uid="uid://ts0cimfv1f58" path="res://icon.svg" id="1_ohy3h"]
+[ext_resource type="Script" path="res://game_manager.gd" id="1_x1c2k"]
+[ext_resource type="PackedScene" uid="uid://d1nwfcr0d5o1x" path="res://player.tscn" id="2_vxjry"]
+[ext_resource type="PackedScene" uid="uid://f4jf1c4v6ts5" path="res://enemies/_base_enemy.tscn" id="3_aexe3"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0bbae"]
+size = Vector2(439, 34)
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Node2D" type="Node2D" parent="."]
+position = Vector2(908, 455)
+
+[node name="Wall" type="StaticBody2D" parent="Node2D"]
+collision_layer = 16
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D/Wall"]
+position = Vector2(-473.5, -428)
+shape = SubResource("RectangleShape2D_0bbae")
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D/Wall"]
+position = Vector2(-473, -428)
+scale = Vector2(3.4375, 0.328125)
+texture = ExtResource("1_ohy3h")
+
+[node name="GameManager" type="Node" parent="."]
+script = ExtResource("1_x1c2k")
+
+[node name="Player" parent="." instance=ExtResource("2_vxjry")]
+friction = 0.3
+acceleration = 0.4
+
+[node name="EnemyBase" parent="." instance=ExtResource("3_aexe3")]
+position = Vector2(859, 933)
+
+[node name="EnemyBase2" parent="." instance=ExtResource("3_aexe3")]
+position = Vector2(259, 957)
+
+[node name="EnemyBase3" parent="." instance=ExtResource("3_aexe3")]
+position = Vector2(908, 455)
