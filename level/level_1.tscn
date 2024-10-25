@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://cu1ptxp2px5uq"]
+
+[ext_resource type="PackedScene" uid="uid://ch3u4v7tets38" path="res://level_manager.tscn" id="1_te1qb"]
+[ext_resource type="PackedScene" uid="uid://d1nwfcr0d5o1x" path="res://player.tscn" id="2_lveq8"]
+[ext_resource type="PackedScene" uid="uid://f4jf1c4v6ts5" path="res://enemies/_base_enemy.tscn" id="3_4s3ti"]
+
+[node name="Level1" type="Node2D"]
+
+[node name="LevelManager" parent="." instance=ExtResource("1_te1qb")]
+next_level = "res://level/level_2.tscn"
+
+[node name="Player" parent="." instance=ExtResource("2_lveq8")]
+position = Vector2(118, 151)
+friction = 0.3
+acceleration = 0.4
+
+[node name="EnemyBase" parent="." instance=ExtResource("3_4s3ti")]
+position = Vector2(859, 933)
