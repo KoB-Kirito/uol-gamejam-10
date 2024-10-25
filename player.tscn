@@ -19,3 +19,5 @@ texture = ExtResource("2_08xx4")
 shape = SubResource("RectangleShape2D_ouvkn")
 
 [node name="Gun" parent="." instance=ExtResource("3_lqo5j")]
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="."]
