@@ -10,6 +10,8 @@ size = Vector2(32, 32)
 size = Vector2(32, 32)
 
 [node name="EnemyBase" type="CharacterBody2D"]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_cobw7")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -29,3 +31,4 @@ shape = SubResource("RectangleShape2D_fxe7l")
 debug_color = Color(0.83421, 0.383626, 0.179764, 0.42)
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_hurtbox_area_entered"]
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]

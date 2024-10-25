@@ -4,8 +4,9 @@ extends CharacterBody2D
 
 
 
-func _on_hurtbox_area_entered(area: Area2D) -> void:
-	#TODO: check body
+func _on_hurtbox_body_entered(body: Node2D) -> void:
+	if body is not Bullet:
+		return
 	
 	die()
 
