@@ -4,6 +4,7 @@ class_name EnemyPath
 
 @export var pathNodesParent : Node2D
 @export var pathPoints : Array[Vector2]
+@export var waitTimes : Array[float]
 @export var debugLine : Line2D
 
 func _ready() -> void:
@@ -26,3 +27,5 @@ func update_path():
 
 func get_path_points() -> Array[Vector2]:
 	return pathPoints
+func get_wait_time(index : int) -> float:
+	return waitTimes[index]

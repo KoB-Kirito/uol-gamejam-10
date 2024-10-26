@@ -51,7 +51,8 @@ func _process(delta: float) -> void:
 		t = 0.0
 		curNode = nextNode
 		
-		timer.start(2.0)
+		timer.start(path.get_wait_time(curNode))
+		print(path.get_wait_time(curNode))
 		return
 		
 	var newPos = pathPoints[curNode] + subPath.normalized() * t
