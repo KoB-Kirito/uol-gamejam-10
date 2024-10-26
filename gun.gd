@@ -7,9 +7,11 @@ extends Node2D
 @onready var animPlayer := $AnimationPlayer
 @onready var sprite := $Sprite
 
-
+@export var IsEquipped:bool
 
 func _physics_process(delta: float) -> void:
+	if not IsEquipped:
+		return
 	look_at(get_global_mouse_position())
 	var normDir = int(rotation_degrees) % 360
 	if normDir > 90 and normDir < 270:
@@ -29,3 +31,15 @@ func shoot(path:Array[Vector2]) -> void:
 	b.launch(path)
 
 		
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body == get_parent():
+		return
+	if body.gun!=null:
+		queue_free()
+		return
+	reparent(body)
+	position=Vector2(0,0)	
+	body.gun=self
+	IsEquipped=true

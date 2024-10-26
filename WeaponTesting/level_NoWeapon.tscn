@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://c6exjv0wo68ut"]
+
+[ext_resource type="PackedScene" uid="uid://ch3u4v7tets38" path="res://level_manager.tscn" id="1_lgun7"]
+[ext_resource type="PackedScene" uid="uid://d1nwfcr0d5o1x" path="res://player.tscn" id="2_8ujg3"]
+[ext_resource type="PackedScene" uid="uid://bvfwp4bvyktui" path="res://gun.tscn" id="3_m4j3d"]
+[ext_resource type="PackedScene" uid="uid://f4jf1c4v6ts5" path="res://enemies/_base_enemy.tscn" id="4_harid"]
+
+[node name="level_NoWeapon" type="Node2D"]
+
+[node name="LevelManager" parent="." instance=ExtResource("1_lgun7")]
+next_level = "res://level/level_2.tscn"
+
+[node name="Player" parent="." instance=ExtResource("2_8ujg3")]
+position = Vector2(118, 151)
+friction = 0.3
+acceleration = 0.4
+startWithWeapon = false
+
+[node name="Gun" parent="." instance=ExtResource("3_m4j3d")]
+position = Vector2(458, 169)
+IsEquipped = false
+
+[node name="EnemyBase" parent="." instance=ExtResource("4_harid")]
+position = Vector2(859, 933)

@@ -17,8 +17,11 @@ width = 32
 curve = SubResource("Curve_y6sfh")
 
 [node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("aim")]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_5xmsr")
 aim = NodePath("Aim")
+startWithWeapon = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)

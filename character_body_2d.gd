@@ -5,9 +5,14 @@ extends CharacterBody2D
 @export var acceleration = 0.1
 @onready var gun := $Gun
 @export var aim : Aim
-
+@export var startWithWeapon:bool
 var hasShot = false
 
+func _ready() -> void:
+	if not startWithWeapon:
+		gun.queue_free()
+		gun=null
+		
 func get_input():
 	var input = Vector2()
 	if Input.is_action_pressed('right'):
@@ -27,7 +32,8 @@ func _physics_process(delta):
 	else:
 		velocity = velocity.lerp(Vector2.ZERO, friction)
 	move_and_slide()
-	
+	if gun == null :
+		return
 	if Input.is_action_just_pressed("shoot") :#&& !hasShot:
 		# Knockback
 		var r = gun.rotation + PI
