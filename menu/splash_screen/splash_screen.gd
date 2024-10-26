@@ -18,11 +18,12 @@ extends Control
 @export var fade_out_transition: Tween.TransitionType = Tween.TransitionType.TRANS_QUAD
 @export var fade_out_ease: Tween.EaseType = Tween.EASE_OUT
 
+var tween: Tween
 
 func _ready() -> void:
 	PauseMenu.enabled = false
 	
-	var tween := create_tween()
+	tween = create_tween()
 	
 	# godot
 	tween.tween_property(%Fade, "modulate", Color.TRANSPARENT, fade_in_duration).set_trans(fade_in_transition).set_ease(fade_in_ease)
@@ -40,3 +41,9 @@ func _ready() -> void:
 	
 	
 	tween.tween_callback(func(): SceneTransition.fade_out_change_scene(scene_transition))
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_pressed():
+		tween.stop()
+		SceneTransition.fade_out_change_scene(scene_transition)
