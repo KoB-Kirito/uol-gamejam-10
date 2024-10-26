@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://dl7hns1gsgxit"]
 
 [ext_resource type="Script" path="res://gun.gd" id="1_htsys"]
-[ext_resource type="PackedScene" uid="uid://b0re63ssao8id" path="res://bullet.tscn" id="2_xd0c6"]
+[ext_resource type="PackedScene" uid="uid://bkmd2osothdin" path="res://Arrow.tscn" id="2_3k8gm"]
 [ext_resource type="Texture2D" uid="uid://ts0cimfv1f58" path="res://icon.svg" id="3_wg5oc"]
 
 [sub_resource type="Animation" id="Animation_olh0g"]
@@ -46,7 +46,7 @@ size = Vector2(31, 8)
 
 [node name="Bow" type="Node2D"]
 script = ExtResource("1_htsys")
-bullet = ExtResource("2_xd0c6")
+bullet = ExtResource("2_3k8gm")
 knockback = 200.0
 IsEquipped = true
 AimBounces = 1

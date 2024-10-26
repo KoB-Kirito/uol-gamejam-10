@@ -29,3 +29,8 @@ position = Vector2(457, 360)
 position = Vector2(-225, 148)
 bullet = ExtResource("6_eou2g")
 IsEquipped = false
+AimBounces = 0
+AimRange = 300
+
+[node name="EnemyBase2" parent="." instance=ExtResource("4_harid")]
+position = Vector2(-59, 58)
