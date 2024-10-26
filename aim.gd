@@ -10,6 +10,7 @@ var current_point = 1
 var curPathLength = 0
 
 const stepsCount = 50
+const distanceLimit = 3000
 
 func _ready():
 	line.add_point(Vector2(0,0))
@@ -23,9 +24,10 @@ func _physics_process(delta: float) -> void:
 	
 	var origin = global_position
 	var dir = (get_global_mouse_position() - origin).normalized()
-	var targetPoint = origin + dir * 5000
+	var targetPoint = origin + dir * distanceLimit
 	
 	curPathLength = stepsCount+1
+	var totalPathLength = 0
 	
 	for k in range(stepsCount):
 		
@@ -46,11 +48,13 @@ func _physics_process(delta: float) -> void:
 		aimPoint.global_position = result.position
 		line.set_point_position(i, result.position - line.global_position)
 		
+		totalPathLength += (result.position - origin).length()
+		
 		var normal = result.normal
 		origin = result.position
 		
 		dir = dir.bounce(normal)
-		targetPoint = origin + dir * 5000
+		targetPoint = origin + dir * max(0, distanceLimit - totalPathLength)
 	
 	return;
 
