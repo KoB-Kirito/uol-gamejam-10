@@ -11,6 +11,7 @@ var curPathLength = 0
 
 const stepsCount = 50
 const distanceLimit = 3000
+const errorCorr = 1
 
 func _ready():
 	line.add_point(Vector2(0,0))
@@ -36,7 +37,8 @@ func _physics_process(delta: float) -> void:
 		
 		var space_state = get_world_2d().direct_space_state
 		# use global coordinates, not local to node
-		var query = PhysicsRayQueryParameters2D.create(origin, targetPoint,16)
+		#PhysicsRayQueryParameters2D.hit_from_inside = false
+		var query = PhysicsRayQueryParameters2D.create(origin, targetPoint, 16)
 		var result = space_state.intersect_ray(query)
 	
 		if !result:
@@ -45,16 +47,16 @@ func _physics_process(delta: float) -> void:
 				line.set_point_position(j, line.get_point_position(i))
 			break
 	
-		aimPoint.global_position = result.position
-		line.set_point_position(i, result.position - line.global_position)
-		
 		totalPathLength += (result.position - origin).length()
 		
-		var normal = result.normal
-		origin = result.position
+		var normal = result.normal.normalized()
+		origin = result.position + normal * errorCorr
 		
 		dir = dir.bounce(normal)
 		targetPoint = origin + dir * max(0, distanceLimit - totalPathLength)
+		
+		aimPoint.global_position = result.position
+		line.set_point_position(i, origin - line.global_position)
 	
 	return;
 
