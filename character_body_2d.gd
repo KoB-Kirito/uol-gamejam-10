@@ -14,6 +14,9 @@ func _ready() -> void:
 		gun.queue_free()
 		gun=null
 		
+func die() -> void:
+	get_tree().reload_current_scene()
+	
 func get_input():
 	var input = Vector2()
 	if Input.is_action_pressed('right'):
@@ -39,7 +42,6 @@ func _physics_process(delta):
 		# Knockback
 		var r = gun.rotation + PI
 		velocity += Vector2(cos(r), sin(r)) * gun.knockback
-	
 		gun.shoot(aim.get_cur_path())
 		hasShot = true
 		
