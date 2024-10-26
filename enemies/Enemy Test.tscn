@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://cjhqp27ywgf3f"]
+[gd_scene load_steps=7 format=3 uid="uid://cjhqp27ywgf3f"]
 
 [ext_resource type="PackedScene" uid="uid://f4jf1c4v6ts5" path="res://enemies/_base_enemy.tscn" id="1_73apd"]
 [ext_resource type="Script" path="res://enemies/enemy_path.gd" id="2_fhum7"]
 [ext_resource type="PackedScene" uid="uid://d1nwfcr0d5o1x" path="res://player.tscn" id="3_so36t"]
-[ext_resource type="Script" path="res://player/player_boots.gd" id="4_t7pby"]
 [ext_resource type="Texture2D" uid="uid://ts0cimfv1f58" path="res://icon.svg" id="5_dppyt"]
 [ext_resource type="PackedScene" uid="uid://t67f5hvq5nio" path="res://player/footprint.tscn" id="5_pxpck"]
 
@@ -44,11 +43,6 @@ position = Vector2(204, 108)
 [node name="Line2D" type="Line2D" parent="Enemy Path"]
 
 [node name="Player" parent="." instance=ExtResource("3_so36t")]
-
-[node name="Node2D" type="Node2D" parent="Player"]
-script = ExtResource("4_t7pby")
-footprints = ExtResource("5_pxpck")
-dst_between = 100.0
 
 [node name="Node2D2" type="Node2D" parent="."]
 position = Vector2(283, 1193)

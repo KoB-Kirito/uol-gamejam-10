@@ -1,10 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://d1nwfcr0d5o1x"]
+[gd_scene load_steps=11 format=3 uid="uid://d1nwfcr0d5o1x"]
 
 [ext_resource type="Script" path="res://character_body_2d.gd" id="1_5xmsr"]
 [ext_resource type="Texture2D" uid="uid://my0cdd0edkbv" path="res://Sprites/PlayerSprite.png" id="2_iugwe"]
 [ext_resource type="PackedScene" uid="uid://bvfwp4bvyktui" path="res://gun.tscn" id="3_lqo5j"]
 [ext_resource type="Script" path="res://aim.gd" id="4_ywamx"]
 [ext_resource type="Script" path="res://camera.gd" id="5_ln3gc"]
+[ext_resource type="Script" path="res://player/player_boots.gd" id="6_x72yt"]
+[ext_resource type="PackedScene" uid="uid://t67f5hvq5nio" path="res://player/footprint.tscn" id="7_o3oni"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ouvkn"]
 size = Vector2(32, 32)
@@ -55,3 +57,8 @@ texture = SubResource("CurveTexture_i78jv")
 top_level = true
 script = ExtResource("5_ln3gc")
 player = NodePath("..")
+
+[node name="Boots" type="Node2D" parent="."]
+script = ExtResource("6_x72yt")
+footprints = ExtResource("7_o3oni")
+dst_between = 100.0
