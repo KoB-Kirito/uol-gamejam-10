@@ -1,0 +1,60 @@
+[gd_scene load_steps=6 format=3 uid="uid://cjhqp27ywgf3f"]
+
+[ext_resource type="PackedScene" uid="uid://f4jf1c4v6ts5" path="res://enemies/_base_enemy.tscn" id="1_73apd"]
+[ext_resource type="Script" path="res://enemies/enemy_path.gd" id="2_fhum7"]
+[ext_resource type="PackedScene" uid="uid://d1nwfcr0d5o1x" path="res://player.tscn" id="3_so36t"]
+[ext_resource type="Texture2D" uid="uid://ts0cimfv1f58" path="res://icon.svg" id="5_dppyt"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3n005"]
+size = Vector2(439, 34)
+
+[node name="EnemyTest" type="Node2D"]
+
+[node name="EnemyBase" parent="." node_paths=PackedStringArray("path") instance=ExtResource("1_73apd")]
+position = Vector2(270, 94)
+rotation = -0.385718
+path = NodePath("../Enemy Path")
+moveSpeed = 500
+
+[node name="Timer" type="Timer" parent="EnemyBase"]
+
+[node name="Enemy Path" type="Node2D" parent="." node_paths=PackedStringArray("pathNodesParent", "debugLine")]
+script = ExtResource("2_fhum7")
+pathNodesParent = NodePath("Path Nodes")
+debugLine = NodePath("Line2D")
+
+[node name="Path Nodes" type="Node2D" parent="Enemy Path"]
+
+[node name="Node2D" type="Node2D" parent="Enemy Path/Path Nodes"]
+position = Vector2(61, 169)
+
+[node name="Node2D2" type="Node2D" parent="Enemy Path/Path Nodes"]
+position = Vector2(166, 540)
+
+[node name="Node2D3" type="Node2D" parent="Enemy Path/Path Nodes"]
+position = Vector2(776, 612)
+
+[node name="Node2D4" type="Node2D" parent="Enemy Path/Path Nodes"]
+position = Vector2(932, 186)
+
+[node name="Line2D" type="Line2D" parent="Enemy Path"]
+
+[node name="Player" parent="." instance=ExtResource("3_so36t")]
+
+[node name="Node2D2" type="Node2D" parent="."]
+position = Vector2(283, 1193)
+rotation = -0.987031
+scale = Vector2(2.16, 1)
+
+[node name="Wall" type="StaticBody2D" parent="Node2D2"]
+collision_layer = 16
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Node2D2/Wall"]
+shape = SubResource("RectangleShape2D_3n005")
+
+[node name="Sprite2D" type="Sprite2D" parent="Node2D2/Wall"]
+scale = Vector2(3.4375, 0.328125)
+texture = ExtResource("5_dppyt")
+
+[connection signal="timeout" from="EnemyBase/Timer" to="EnemyBase" method="_on_timer_timeout"]

@@ -49,3 +49,5 @@ collision_mask = 16
 [node name="Sprite2D2" type="Sprite2D" parent="."]
 scale = Vector2(0.25, 7.739)
 texture = SubResource("CurveTexture_i78jv")
+
+[node name="Camera2D" type="Camera2D" parent="." groups=["camera"]]
