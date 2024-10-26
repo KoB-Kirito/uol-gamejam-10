@@ -12,6 +12,8 @@ extends Node2D
 @export var AimBounces:int
 @export var AimRange:int
 
+var hasBullet:bool=true
+
 func _physics_process(delta: float) -> void:
 	if not IsEquipped:
 		return
@@ -22,18 +24,21 @@ func _physics_process(delta: float) -> void:
 	else:
 		sprite.flip_v = false
 
-func shoot(path:Array[Vector2]) -> void:
+func shoot(path:Array[Vector2]) -> bool:
+	if not hasBullet:
+		return false
 	animPlayer.stop()
 	animPlayer.play("shoot")
 	
 	var b = bullet.instantiate()
-	get_parent().add_child(b)
+	get_tree().root.add_child(b)
 	b.position = tip.global_position
 	b.rotation = rotation
 	
 	b.launch(path)
-
-		
+	hasBullet=false
+	return true
+	
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:

@@ -7,16 +7,14 @@ extends CharacterBody2D
 @onready var gun := $Gun
 @export var aim : Aim
 @export var startWithWeapon:bool
-var hasShot = false
+
 
 func _ready() -> void:
 	if not startWithWeapon:
 		gun.queue_free()
 		gun=null
 		aim.setAimSettings(1,0)
-		
-		
-		
+	
 func die() -> void:
 	get_tree().reload_current_scene()
 	
@@ -41,10 +39,10 @@ func _physics_process(delta):
 	move_and_slide()
 	if gun == null :
 		return
-	if Input.is_action_just_pressed("shoot") :#&& !hasShot:
+	if Input.is_action_just_pressed("shoot") :
 		# Knockback
+		if not gun.shoot(aim.get_cur_path()):
+			return
 		var r = gun.rotation + PI
 		velocity += Vector2(cos(r), sin(r)) * gun.knockback
-		gun.shoot(aim.get_cur_path())
-		hasShot = true
 		
