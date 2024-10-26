@@ -6,6 +6,7 @@ extends Node2D
 @onready var tip := $Sprite/Tip
 @onready var animPlayer := $AnimationPlayer
 @onready var sprite := $Sprite
+@onready var area:= $Area2D
 
 @export var IsEquipped:bool
 
@@ -34,7 +35,10 @@ func shoot(path:Array[Vector2]) -> void:
 
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body is Enemy:
+		return
 	if body == get_parent():
+		area.queue_free()
 		return
 	if body.gun!=null:
 		queue_free()
@@ -43,3 +47,5 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	position=Vector2(0,0)	
 	body.gun=self
 	IsEquipped=true
+	area.queue_free()
+	
