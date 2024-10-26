@@ -9,6 +9,8 @@ extends Node2D
 @onready var area:= $Area2D
 
 @export var IsEquipped:bool
+@export var AimBounces:int
+@export var AimRange:int
 
 func _physics_process(delta: float) -> void:
 	if not IsEquipped:
@@ -46,6 +48,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	reparent(body)
 	position=Vector2(0,0)	
 	body.gun=self
+	body.aim.setAimSettings(AimBounces,AimRange)
+	
 	IsEquipped=true
 	area.queue_free()
-	

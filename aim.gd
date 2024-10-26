@@ -9,13 +9,14 @@ class_name Aim
 var current_point = 1
 var curPathLength = 0
 
-const stepsCount = 50
-const distanceLimit = 3000
+var stepsCount = 50
+var distanceLimit = 3000
 const errorCorr = 1
 
 func _ready():
 	line.add_point(Vector2(0,0))
-
+	line.width=1
+	line.default_color=Color.RED
 	for i in range(stepsCount):
 		line.add_point(Vector2(0,0))
 
@@ -65,3 +66,12 @@ func get_cur_path() -> Array[Vector2]:
 	for	i in range(curPathLength):
 		path.append(line.get_point_position(i) + line.global_position)
 	return path
+	
+func setAimSettings(MaxBounces:int,MaxDistance:int):
+	if(MaxBounces<1):
+		MaxBounces=1
+	if(MaxDistance<0):
+		MaxDistance=0
+	stepsCount=MaxBounces
+	distanceLimit=MaxDistance
+	

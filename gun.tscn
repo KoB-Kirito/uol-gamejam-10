@@ -42,17 +42,19 @@ _data = {
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hl0mm"]
-size = Vector2(99.5, 37.5)
+size = Vector2(31, 8)
 
 [node name="Gun" type="Node2D"]
 script = ExtResource("1_nvh88")
 bullet = ExtResource("2_y752r")
 knockback = 200.0
 IsEquipped = true
+AimBounces = 50
+AimRange = 3000
 
 [node name="Sprite" type="Sprite2D" parent="."]
 position = Vector2(-1, -3)
-scale = Vector2(0.779298, 0.209606)
+scale = Vector2(0.25, 0.067)
 texture = ExtResource("1_v41nx")
 
 [node name="Tip" type="Marker2D" parent="Sprite"]
@@ -69,7 +71,7 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(-1.25, -1.25)
+position = Vector2(-1.5, -3)
 shape = SubResource("RectangleShape2D_hl0mm")
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

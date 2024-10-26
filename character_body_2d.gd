@@ -13,6 +13,9 @@ func _ready() -> void:
 	if not startWithWeapon:
 		gun.queue_free()
 		gun=null
+		aim.setAimSettings(1,0)
+		
+		
 		
 func die() -> void:
 	get_tree().reload_current_scene()
