@@ -2,9 +2,12 @@ extends Node2D
 
 #@onready var bullet = preload("res://bullet.tscn")
 @export var bullet : PackedScene
+@export var knockback :float
 @onready var tip := $Sprite/Tip
 @onready var animPlayer := $AnimationPlayer
 @onready var sprite := $Sprite
+
+
 
 func _physics_process(delta: float) -> void:
 	look_at(get_global_mouse_position())

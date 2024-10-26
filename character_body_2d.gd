@@ -7,7 +7,6 @@ extends CharacterBody2D
 @export var aim : Aim
 
 var hasShot = false
-@export var knockback = 200
 
 func get_input():
 	var input = Vector2()
@@ -32,7 +31,7 @@ func _physics_process(delta):
 	if Input.is_action_just_pressed("shoot") :#&& !hasShot:
 		# Knockback
 		var r = gun.rotation + PI
-		velocity += Vector2(cos(r), sin(r)) * knockback
+		velocity += Vector2(cos(r), sin(r)) * gun.knockback
 	
 		gun.shoot(aim.get_cur_path())
 		hasShot = true
