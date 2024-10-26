@@ -17,8 +17,8 @@ acceleration = 0.4
 startWithWeapon = false
 
 [node name="Gun" parent="." instance=ExtResource("3_m4j3d")]
-position = Vector2(458, 169)
+position = Vector2(449, 347)
 IsEquipped = false
 
 [node name="EnemyBase" parent="." instance=ExtResource("4_harid")]
-position = Vector2(859, 933)
+position = Vector2(457, 360)
