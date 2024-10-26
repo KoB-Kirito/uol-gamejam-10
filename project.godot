@@ -39,6 +39,7 @@ project/assembly_name="UOL Game Jam"
 
 enemy=""
 player=""
+camera=""
 
 [input]
 
