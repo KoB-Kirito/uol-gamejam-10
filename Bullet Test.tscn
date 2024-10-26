@@ -1,21 +1,12 @@
-[gd_scene load_steps=11 format=3 uid="uid://bunl221tmjvo2"]
+[gd_scene load_steps=8 format=3 uid="uid://bunl221tmjvo2"]
 
 [ext_resource type="Texture2D" uid="uid://ts0cimfv1f58" path="res://icon.svg" id="1_ohy3h"]
 [ext_resource type="PackedScene" uid="uid://d1nwfcr0d5o1x" path="res://player.tscn" id="2_vxjry"]
 [ext_resource type="PackedScene" uid="uid://f4jf1c4v6ts5" path="res://enemies/_base_enemy.tscn" id="3_aexe3"]
-[ext_resource type="Script" path="res://aim.gd" id="5_bhbsd"]
 [ext_resource type="Script" path="res://pathing_test.gd" id="5_qc72l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0bbae"]
 size = Vector2(439, 34)
-
-[sub_resource type="Curve" id="Curve_y6sfh"]
-_data = [Vector2(0.216129, 0.0702319), 0.0, 0.0, 0, 0, Vector2(0.390323, 0.43165), 0.0, 0.0, 0, 0, Vector2(0.664516, 0.137242), 0.0, 0.0, 0, 0]
-point_count = 3
-
-[sub_resource type="CurveTexture" id="CurveTexture_kttcm"]
-width = 32
-curve = SubResource("Curve_y6sfh")
 
 [sub_resource type="Gradient" id="Gradient_57amd"]
 
@@ -54,10 +45,9 @@ shape = SubResource("RectangleShape2D_0bbae")
 scale = Vector2(3.4375, 0.328125)
 texture = ExtResource("1_ohy3h")
 
-[node name="Player" parent="." node_paths=PackedStringArray("aim") instance=ExtResource("2_vxjry")]
+[node name="Player" parent="." instance=ExtResource("2_vxjry")]
 friction = 0.3
 acceleration = 0.4
-aim = NodePath("../Aim")
 
 [node name="EnemyBase" parent="." instance=ExtResource("3_aexe3")]
 position = Vector2(859, 933)
@@ -67,23 +57,6 @@ position = Vector2(259, 957)
 
 [node name="EnemyBase3" parent="." instance=ExtResource("3_aexe3")]
 position = Vector2(908, 455)
-
-[node name="Aim" type="Node2D" parent="." node_paths=PackedStringArray("line", "aimPoint", "raycaster", "player")]
-script = ExtResource("5_bhbsd")
-line = NodePath("Line2D")
-aimPoint = NodePath("../Sprite2D")
-raycaster = NodePath("RayCast2D")
-player = NodePath("../Player")
-
-[node name="Line2D" type="Line2D" parent="Aim"]
-
-[node name="RayCast2D" type="RayCast2D" parent="Aim"]
-scale = Vector2(0.925091, 1.05446)
-collision_mask = 16
-
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.475, 14.705)
-texture = SubResource("CurveTexture_kttcm")
 
 [node name="Pathing" type="Node2D" parent="." node_paths=PackedStringArray("target")]
 visible = false

@@ -13,8 +13,6 @@ func _ready():
 		var prev = totalDistances[i - 1]
 		var new = prev + (path[i] - path[i-1]).length()
 		totalDistances.append(new)
-		print(new)
-	print(totalDistances.size())
 
 func _process(delta: float) -> void:
 	var speed = bulletSpeed * delta

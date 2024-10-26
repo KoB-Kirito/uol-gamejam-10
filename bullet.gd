@@ -35,7 +35,7 @@ func _process(delta: float) -> void:
 	global_position = newPos
 	
 func launch(path : Array[Vector2]):
-	print(path)
+	
 	self.path = path
 	
 	totalDistances.append(0.0)
