@@ -16,8 +16,6 @@ rotation = -0.385718
 path = NodePath("../Enemy Path")
 moveSpeed = 500
 
-[node name="Timer" type="Timer" parent="EnemyBase"]
-
 [node name="Enemy Path" type="Node2D" parent="." node_paths=PackedStringArray("pathNodesParent", "debugLine")]
 script = ExtResource("2_fhum7")
 pathNodesParent = NodePath("Path Nodes")
@@ -56,5 +54,3 @@ shape = SubResource("RectangleShape2D_3n005")
 [node name="Sprite2D" type="Sprite2D" parent="Node2D2/Wall"]
 scale = Vector2(3.4375, 0.328125)
 texture = ExtResource("5_dppyt")
-
-[connection signal="timeout" from="EnemyBase/Timer" to="EnemyBase" method="_on_timer_timeout"]
