@@ -19,7 +19,6 @@ gradient = SubResource("Gradient_57amd")
 position = Vector2(514, 606)
 
 [node name="Wall" type="StaticBody2D" parent="Node2D"]
-scale = Vector2(1.92514, 0.21136)
 collision_layer = 16
 collision_mask = 16
 
@@ -45,10 +44,6 @@ shape = SubResource("RectangleShape2D_0bbae")
 scale = Vector2(3.4375, 0.328125)
 texture = ExtResource("1_ohy3h")
 
-[node name="Player" parent="." instance=ExtResource("2_vxjry")]
-friction = 0.3
-acceleration = 0.4
-
 [node name="EnemyBase" parent="." instance=ExtResource("3_aexe3")]
 position = Vector2(859, 933)
 
@@ -69,3 +64,6 @@ target = NodePath("Sprite2D")
 [node name="Sprite2D" type="Sprite2D" parent="Pathing"]
 scale = Vector2(2.2443, 0.0661476)
 texture = SubResource("GradientTexture2D_dwiwd")
+
+[node name="Player" parent="." instance=ExtResource("2_vxjry")]
+collision_mask = 17

@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://f4jf1c4v6ts5"]
+[gd_scene load_steps=6 format=3 uid="uid://f4jf1c4v6ts5"]
 
 [ext_resource type="Script" path="res://enemies/enemy.gd" id="1_cobw7"]
 [ext_resource type="Texture2D" uid="uid://ts0cimfv1f58" path="res://icon.svg" id="2_nkbw1"]
+[ext_resource type="Script" path="res://enemies/enemy_sight.gd" id="3_jy42g"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_yxmdp"]
 size = Vector2(32, 32)
@@ -29,5 +30,20 @@ collision_mask = 4
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
 shape = SubResource("RectangleShape2D_fxe7l")
 debug_color = Color(0.83421, 0.383626, 0.179764, 0.42)
+
+[node name="Enemy Sight" type="Node2D" parent="." node_paths=PackedStringArray("debugLineLeft", "debugLineRight", "debugLineRay")]
+script = ExtResource("3_jy42g")
+angleSize = 45.0
+length = 1000.0
+debugLineLeft = NodePath("Line2D Left")
+debugLineRight = NodePath("Line2D Right")
+debugLineRay = NodePath("Line2D Ray")
+
+[node name="Line2D Left" type="Line2D" parent="Enemy Sight"]
+
+[node name="Line2D Right" type="Line2D" parent="Enemy Sight"]
+
+[node name="Line2D Ray" type="Line2D" parent="Enemy Sight"]
+default_color = Color(0.871789, 0.485318, 0.597971, 1)
 
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
