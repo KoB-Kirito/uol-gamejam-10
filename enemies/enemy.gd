@@ -5,8 +5,10 @@ extends CharacterBody2D
 @export var canSee = true
 @export var path : EnemyPath
 @export var moveSpeed : int
+@export var turnSpeed : float
 @export var blindnessRadius : float
 @export var investigationCooldown : float
+@export var investigationDuration : float
 
 @onready var timer = $Timer
 
@@ -23,6 +25,11 @@ var is_returning = false
 var backtrackStack : Array[Vector2]
 var curPOI : Vector2
 
+var desRotation = 0.0
+var curRotation = 0.0
+var initRotation = 0.0
+var is_turning = false
+
 signal died(enemy: Enemy)
 
 func _ready() -> void:
@@ -30,6 +37,7 @@ func _ready() -> void:
 		canMove = false
 		return
 	
+	path.update_path()
 	pathPoints = path.get_path_points()
 	
 	advance()
@@ -38,6 +46,19 @@ func _process(delta: float) -> void:
 	if !canMove:
 		return
 	
+	if is_turning:
+		#print(curRotation)
+		
+		curRotation += delta * turnSpeed
+		
+		global_rotation = rotate_toward(initRotation, desRotation, curRotation)
+		
+		if curRotation >= abs(desRotation - initRotation):
+			global_rotation = desRotation
+			is_turning = false
+		return
+		
+	
 	if is_investigating:
 		investigateMove(delta)
 	else:
@@ -45,6 +66,21 @@ func _process(delta: float) -> void:
 
 func advance():
 	advanceFlag = true
+	
+	var nextNode = (curNode + 1)
+	if nextNode >= pathPoints.size() - 1:
+		nextNode = 0
+	
+	var subPath = (pathPoints[nextNode] - pathPoints[curNode])
+	
+	var angleRad = acos(subPath.dot(Vector2(1,0)) / (subPath.length()))
+	if subPath.dot(Vector2(0,1)) < 0:
+		angleRad *= -1
+	desRotation = angleRad
+	
+	is_turning = true
+	initRotation = global_rotation	
+	curRotation = 0.0
 
 func _on_hurtbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group(Global.playerGroup):
@@ -63,6 +99,7 @@ func die() -> void:
 	queue_free()
 
 func _on_timer_timeout() -> void:
+	timer.stop()
 	advance()
 	pass # Replace with function body.
 
@@ -82,6 +119,7 @@ func patrol(delta : float):
 	var nextNode = (curNode + 1)
 	if nextNode >= pathPoints.size() - 1:
 		nextNode = 0
+	
 	var subPath = (pathPoints[nextNode] - pathPoints[curNode])
 	
 	if subPath.length() <= t:
@@ -99,7 +137,7 @@ func patrol(delta : float):
 	var angleRad = acos(subPath.dot(Vector2(1,0)) / (subPath.length()))
 	if subPath.dot(Vector2(0,1)) < 0:
 		angleRad *= -1
-	global_rotation = angleRad
+	#global_rotation = angleRad
 
 func investigateMove(delta : float):
 	if cdInv > 0.0:
@@ -152,9 +190,6 @@ func investigate(pos : Vector2):
 	tInv = 0.0
 	
 	cdInv = investigationCooldown
-	
-	#print("Investigating")
-	#print(pos)
 
 func reach_investigation():
 	var oldPOI = curPOI
