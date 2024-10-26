@@ -38,6 +38,7 @@ project/assembly_name="UOL Game Jam"
 [global_group]
 
 enemy=""
+player=""
 
 [input]
 

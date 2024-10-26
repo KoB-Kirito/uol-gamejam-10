@@ -16,7 +16,7 @@ point_count = 3
 width = 32
 curve = SubResource("Curve_y6sfh")
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("aim")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("aim") groups=["player"]]
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_5xmsr")
