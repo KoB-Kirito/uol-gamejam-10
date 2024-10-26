@@ -9,8 +9,6 @@ extends CharacterBody2D
 var hasShot = false
 @export var knockback = 200
 
-@onready var bullet = preload("res://bullet.tscn")
-
 func get_input():
 	var input = Vector2()
 	if Input.is_action_pressed('right'):
@@ -36,12 +34,6 @@ func _physics_process(delta):
 		var r = gun.rotation + PI
 		velocity += Vector2(cos(r), sin(r)) * knockback
 	
-		gun.shoot()
+		gun.shoot(aim.get_cur_path())
 		hasShot = true
 		
-		var b = bullet.instantiate()
-		get_parent().add_child(b)
-		b.position = gun.tip.global_position
-		b.rotation = gun.rotation
-		
-		b.launch(aim.get_cur_path())

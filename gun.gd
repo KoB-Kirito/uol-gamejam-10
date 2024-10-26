@@ -1,5 +1,7 @@
 extends Node2D
 
+#@onready var bullet = preload("res://bullet.tscn")
+@export var bullet : PackedScene
 @onready var tip := $Sprite/Tip
 @onready var animPlayer := $AnimationPlayer
 @onready var sprite := $Sprite
@@ -12,7 +14,15 @@ func _physics_process(delta: float) -> void:
 	else:
 		sprite.flip_v = false
 
-func shoot() -> void:
+func shoot(path:Array[Vector2]) -> void:
 	animPlayer.stop()
 	animPlayer.play("shoot")
+	
+	var b = bullet.instantiate()
+	get_parent().add_child(b)
+	b.position = tip.global_position
+	b.rotation = rotation
+	
+	b.launch(path)
+
 		

@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://bvfwp4bvyktui"]
+[gd_scene load_steps=7 format=3 uid="uid://bvfwp4bvyktui"]
 
 [ext_resource type="Script" path="res://gun.gd" id="1_nvh88"]
 [ext_resource type="Texture2D" uid="uid://ts0cimfv1f58" path="res://icon.svg" id="1_v41nx"]
+[ext_resource type="PackedScene" uid="uid://b0re63ssao8id" path="res://bullet.tscn" id="2_y752r"]
 
 [sub_resource type="Animation" id="Animation_olh0g"]
 length = 0.001
@@ -42,6 +43,7 @@ _data = {
 
 [node name="Gun" type="Node2D"]
 script = ExtResource("1_nvh88")
+bullet = ExtResource("2_y752r")
 
 [node name="Sprite" type="Sprite2D" parent="."]
 position = Vector2(-1, -3)
