@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=3 uid="uid://t67f5hvq5nio"]
+
+[ext_resource type="Script" path="res://player/footprint.gd" id="1_uy0n8"]
+[ext_resource type="Texture2D" uid="uid://ts0cimfv1f58" path="res://icon.svg" id="2_1s2ro"]
+
+[node name="Footprint" type="Node2D" node_paths=PackedStringArray("sprite") groups=["footprints"]]
+script = ExtResource("1_uy0n8")
+lifetime = 5.0
+sprite = NodePath("Sprite")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("2_1s2ro")

@@ -2,17 +2,26 @@ class_name Enemy
 extends CharacterBody2D
 ## base class
 
+@export var canSee = true
 @export var path : EnemyPath
 @export var moveSpeed : int
+@export var blindnessRadius : float
+@export var investigationCooldown : float
 
 @onready var timer = $Timer
 
 var pathPoints : Array[Vector2]
 var curNode = 0
 var advanceFlag = false
-var t = 0
-
+var t = 0.0
 var canMove = true
+
+var tInv = 0.0
+var cdInv = 0.0
+var is_investigating = false
+var is_returning = false
+var backtrackStack : Array[Vector2]
+var curPOI : Vector2
 
 signal died(enemy: Enemy)
 
@@ -29,6 +38,35 @@ func _process(delta: float) -> void:
 	if !canMove:
 		return
 	
+	if is_investigating:
+		investigateMove(delta)
+	else:
+		patrol(delta)
+
+func advance():
+	advanceFlag = true
+
+func _on_hurtbox_body_entered(body: Node2D) -> void:
+	if body.is_in_group(Global.playerGroup):
+		body.die()
+		return
+	
+	if body is not Bullet:
+		return
+	
+	die()
+
+func die() -> void:
+	#TODO: animation
+	
+	died.emit(self)
+	queue_free()
+
+func _on_timer_timeout() -> void:
+	advance()
+	pass # Replace with function body.
+
+func patrol(delta : float):
 	var flagCalled = false
 	
 	if advanceFlag:
@@ -52,7 +90,7 @@ func _process(delta: float) -> void:
 		curNode = nextNode
 		
 		timer.start(path.get_wait_time(curNode))
-		print(path.get_wait_time(curNode))
+		
 		return
 		
 	var newPos = pathPoints[curNode] + subPath.normalized() * t
@@ -63,26 +101,72 @@ func _process(delta: float) -> void:
 		angleRad *= -1
 	global_rotation = angleRad
 
-func advance():
-	advanceFlag = true
+func investigateMove(delta : float):
+	if cdInv > 0.0:
+		cdInv = max(0, cdInv - delta)
+	
+	tInv += moveSpeed * delta
+	
+	var subPath = (curPOI - backtrackStack[backtrackStack.size() - 1])
+	
+	if subPath.length() <= tInv:
+		if !is_returning:
+			reach_investigation()
+			return
+		
+		if backtrackStack.size() == 1:
+			finish_investigation()
+			return;
+		
+		var oldPOI = curPOI
+		backtrackStack.pop_back()
+		curPOI = backtrackStack.pop_back()
+		backtrackStack.append(oldPOI)
+		
+		tInv = 0.0
+		return
+		
+	var newPos = backtrackStack[backtrackStack.size() - 1] + subPath.normalized() * tInv
+	global_position = newPos
+	
+	var angleRad = acos(subPath.dot(Vector2(1,0)) / (subPath.length()))
+	if subPath.dot(Vector2(0,1)) < 0:
+		angleRad *= -1
+	global_rotation = angleRad
 
-func _on_hurtbox_body_entered(body: Node2D) -> void:
-	if body.is_in_group(Global.playerGroup):
-		body.die()
+func investigate(pos : Vector2):
+	if cdInv > 0.0:
+		return
+		
+	if (curPOI - pos).length_squared() <= blindnessRadius * blindnessRadius:
 		return
 	
-	if body is not Bullet:
-		return
+	if is_returning:
+		backtrackStack.pop_back()
+		backtrackStack.append(curPOI)
+		is_returning = false
 	
-	die()
-
-func die() -> void:
-	#TODO: animation
+	backtrackStack.append(global_position)
+	curPOI = pos
+	is_investigating = true
+	tInv = 0.0
 	
-	died.emit(self)
-	queue_free()
+	cdInv = investigationCooldown
+	
+	#print("Investigating")
+	#print(pos)
 
+func reach_investigation():
+	var oldPOI = curPOI
+	curPOI = backtrackStack.pop_back()
+	backtrackStack.append(oldPOI)
+		
+	tInv = 0.0
+	is_returning = true
 
-func _on_timer_timeout() -> void:
-	advance()
-	pass # Replace with function body.
+func finish_investigation():
+	is_returning = false
+	is_investigating = false
+	
+	backtrackStack.clear()
+	

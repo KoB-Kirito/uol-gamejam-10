@@ -16,7 +16,7 @@ func _ready() -> void:
 		aim.setAimSettings(1,0)
 	
 func die() -> void:
-	get_tree().reload_current_scene()
+	pass#get_tree().reload_current_scene()
 	
 func get_input():
 	var input = Vector2()

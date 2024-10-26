@@ -3,6 +3,7 @@ extends Node
 
 const playerGroup = "player"
 const cameraGroup = "camera"
+const footprintGroup = "footprints"
 
 var score: int = 0
 
