@@ -1,13 +1,20 @@
-extends CharacterBody2D
+extends Node2D
 
-class_name Bullet
-
-var path : Array[Vector2]
+@export var path : Array[Vector2]
 var totalDistances : Array[float]
 var totalDst : float
 
-@export var bulletSpeed = 200
+@export var bulletSpeed = 70
+@export var target : Node2D
 
+func _ready():
+	totalDistances.append(0.0)
+	for i in range(1, path.size()):
+		var prev = totalDistances[i - 1]
+		var new = prev + (path[i] - path[i-1]).length()
+		totalDistances.append(new)
+		print(new)
+	print(totalDistances.size())
 
 func _process(delta: float) -> void:
 	var speed = bulletSpeed * delta
@@ -32,15 +39,4 @@ func _process(delta: float) -> void:
 	var newPos = (path[end] - path[newBegin]) * progress + path[newBegin]
 	
 	totalDst = totalDistances[newBegin] + (path[end] - path[newBegin]).length() * progress
-	global_position = newPos
-	
-func launch(path : Array[Vector2]):
-	print(path)
-	self.path = path
-	
-	totalDistances.append(0.0)
-	for i in range(1, path.size()):
-		var prev = totalDistances[i - 1]
-		var new = prev + (path[i] - path[i-1]).length()
-		totalDistances.append(new)
-	
+	target.global_position = newPos

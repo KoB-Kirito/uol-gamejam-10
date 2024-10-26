@@ -4,6 +4,7 @@ extends CharacterBody2D
 @export var friction = 0.01
 @export var acceleration = 0.1
 @onready var gun := $Gun
+@export var aim : Aim
 
 var hasShot = false
 @export var knockback = 200
@@ -43,4 +44,4 @@ func _physics_process(delta):
 		b.position = gun.tip.global_position
 		b.rotation = gun.rotation
 		
-		b.launch()
+		b.launch(aim.get_cur_path())
