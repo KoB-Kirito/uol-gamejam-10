@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://d1nwfcr0d5o1x"]
+[gd_scene load_steps=9 format=3 uid="uid://d1nwfcr0d5o1x"]
 
 [ext_resource type="Script" path="res://character_body_2d.gd" id="1_5xmsr"]
 [ext_resource type="Texture2D" uid="uid://my0cdd0edkbv" path="res://Sprites/PlayerSprite.png" id="2_iugwe"]
 [ext_resource type="PackedScene" uid="uid://bvfwp4bvyktui" path="res://gun.tscn" id="3_lqo5j"]
 [ext_resource type="Script" path="res://aim.gd" id="4_ywamx"]
+[ext_resource type="Script" path="res://camera.gd" id="5_ln3gc"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ouvkn"]
 size = Vector2(32, 32)
@@ -50,4 +51,7 @@ collision_mask = 16
 scale = Vector2(0.25, 7.739)
 texture = SubResource("CurveTexture_i78jv")
 
-[node name="Camera2D" type="Camera2D" parent="." groups=["camera"]]
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player") groups=["camera"]]
+top_level = true
+script = ExtResource("5_ln3gc")
+player = NodePath("..")
