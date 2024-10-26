@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dyl6iu5x0t2ld"]
+
+[ext_resource type="Script" path="res://autoloads/bgm.gd" id="2_j57m7"]
+
+[node name="Bgm" type="AudioStreamPlayer"]
+process_mode = 3
+autoplay = true
+script = ExtResource("2_j57m7")

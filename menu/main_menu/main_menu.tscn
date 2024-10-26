@@ -1,0 +1,69 @@
+[gd_scene load_steps=6 format=3 uid="uid://dn4dashthsf4l"]
+
+[ext_resource type="Theme" path="res://menu/theme.tres" id="1_xjn03"]
+[ext_resource type="Script" path="res://menu/main_menu/main_menu.gd" id="2_opjhm"]
+[ext_resource type="Script" path="res://autoloads/transition_data_out.gd" id="3_81j5b"]
+[ext_resource type="PackedScene" uid="uid://csligmwblw82j" path="res://menu/options_menu/options_menu.tscn" id="3_d7lqq"]
+
+[sub_resource type="Resource" id="Resource_7jpxi"]
+script = ExtResource("3_81j5b")
+scene_path = "res://level/level_1.tscn"
+transition = 1
+color = Color(0, 0, 0, 1)
+duration = 1.0
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_xjn03")
+script = ExtResource("2_opjhm")
+next_level = SubResource("Resource_7jpxi")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -65.5
+offset_top = -217.0
+offset_right = 65.5
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="StartButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+text = "Start"
+
+[node name="FreeButton" type="Button" parent="VBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+text = "Other Mode"
+
+[node name="OptionsButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+text = "Options"
+
+[node name="ExitButton" type="Button" parent="VBoxContainer"]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+text = "Exit"
+
+[node name="OptionsMenu" parent="." instance=ExtResource("3_d7lqq")]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+
+[connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/FreeButton" to="." method="_on_free_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

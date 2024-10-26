@@ -1,0 +1,36 @@
+[gd_scene load_steps=2 format=3 uid="uid://6so3mi5a1jed"]
+
+[ext_resource type="Script" path="res://menu/options_menu/volume_option.gd" id="1_cjvuf"]
+
+[node name="VolumeOption" type="HBoxContainer"]
+theme_override_constants/separation = 64
+script = ExtResource("1_cjvuf")
+
+[node name="Label" type="Label" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+text = "Master Volume"
+
+[node name="VolumeSlider" type="HSlider" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 1
+
+[node name="PercentLabel" type="Label" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(80, 0)
+layout_mode = 2
+text = "100%"
+horizontal_alignment = 2
+clip_text = true
+
+[node name="snd_demo" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+
+[connection signal="drag_ended" from="VolumeSlider" to="." method="_on_volume_slider_drag_ended"]
+[connection signal="drag_started" from="VolumeSlider" to="." method="_on_volume_slider_drag_started"]
+[connection signal="focus_entered" from="VolumeSlider" to="." method="_on_volume_slider_drag_started"]
+[connection signal="focus_exited" from="VolumeSlider" to="." method="_on_volume_slider_focus_exited"]
+[connection signal="value_changed" from="VolumeSlider" to="." method="_on_volume_slider_value_changed"]

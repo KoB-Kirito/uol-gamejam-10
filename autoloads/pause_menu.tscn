@@ -1,0 +1,86 @@
+[gd_scene load_steps=6 format=3 uid="uid://bdw233li11voo"]
+
+[ext_resource type="Script" path="res://autoloads/pause_menu.gd" id="1_ma3iv"]
+[ext_resource type="PackedScene" uid="uid://csligmwblw82j" path="res://menu/options_menu/options_menu.tscn" id="2_5pl4g"]
+[ext_resource type="Theme" path="res://menu/theme.tres" id="2_k7txe"]
+
+[sub_resource type="Gradient" id="Gradient_jqtjp"]
+colors = PackedColorArray(0.02, 0, 0, 0.752941, 0.56, 0, 0, 0.752941)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_or1gk"]
+gradient = SubResource("Gradient_jqtjp")
+fill_to = Vector2(0, 1)
+
+[node name="PauseMenuLayer" type="CanvasLayer"]
+process_mode = 3
+layer = 99
+script = ExtResource("1_ma3iv")
+main_menu = "res://menu/splash_screen/splash_screen.tscn"
+options_scene = ExtResource("2_5pl4g")
+
+[node name="Fade" type="TextureRect" parent="."]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+theme = ExtResource("2_k7txe")
+texture = SubResource("GradientTexture2D_or1gk")
+
+[node name="TitleLabel" type="Label" parent="Fade"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_right = 20.0
+offset_bottom = 23.0
+grow_horizontal = 2
+text = "PAUSED"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Fade"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ResumeButton" type="Button" parent="Fade/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(310, 0)
+layout_mode = 2
+text = "Resume"
+
+[node name="RestartButton" type="Button" parent="Fade/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(310, 0)
+layout_mode = 2
+text = "Restart Level"
+
+[node name="OptionsButton" type="Button" parent="Fade/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(310, 0)
+layout_mode = 2
+text = "Options"
+
+[node name="ExitButton" type="Button" parent="Fade/VBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(310, 0)
+layout_mode = 2
+text = "Exit to Main Menu"
+
+[connection signal="gui_input" from="Fade" to="." method="_on_fade_gui_input"]
+[connection signal="pressed" from="Fade/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="Fade/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="Fade/VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="pressed" from="Fade/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

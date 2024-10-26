@@ -20,6 +20,8 @@ func _ready() -> void:
 		enemy.died.connect(on_enemy_died)
 	
 	print_debug("found ", enemies.size(), " enemies")
+	
+	SceneTransition.fade_in()
 
 
 func on_enemy_died(enemy: Enemy) -> void:

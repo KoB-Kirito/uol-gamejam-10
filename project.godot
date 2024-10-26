@@ -11,14 +11,24 @@ config_version=5
 [application]
 
 config/name="UOL Game Jam"
-run/main_scene="res://level/level_1.tscn"
+run/main_scene="res://menu/splash_screen/splash_screen.tscn"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
 
+[autoload]
+
+Bgm="*res://autoloads/bgm.tscn"
+Event="*res://autoloads/events.gd"
+Global="*res://autoloads/globals.gd"
+PauseMenu="*res://autoloads/pause_menu.tscn"
+SceneTransition="*res://autoloads/scene_transition.tscn"
+
 [display]
 
-window/size/viewport_width=1280
-window/size/viewport_height=1280
+window/size/viewport_width=640
+window/size/viewport_height=640
+window/size/window_width_override=1280
+window/size/window_height_override=1280
 window/stretch/mode="viewport"
 
 [dotnet]
@@ -54,5 +64,10 @@ down={
 shoot={
 "deadzone": 0.5,
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":1,"canceled":false,"pressed":false,"double_click":false,"script":null)
+]
+}
+pause={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":80,"key_label":0,"unicode":112,"location":0,"echo":false,"script":null)
 ]
 }

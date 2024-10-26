@@ -1,0 +1,168 @@
+[gd_scene load_steps=10 format=3 uid="uid://csligmwblw82j"]
+
+[ext_resource type="Theme" path="res://menu/theme.tres" id="1_63gep"]
+[ext_resource type="Script" path="res://menu/options_menu/options_menu.gd" id="2_rkcsq"]
+[ext_resource type="PackedScene" uid="uid://6so3mi5a1jed" path="res://menu/options_menu/volume_option.tscn" id="3_22gke"]
+[ext_resource type="Script" path="res://menu/options_menu/audio.gd" id="3_g02p7"]
+[ext_resource type="Script" path="res://menu/options_menu/video.gd" id="5_exke4"]
+[ext_resource type="Script" path="res://menu/options_menu/controls.gd" id="17_4gdli"]
+[ext_resource type="PackedScene" uid="uid://d2juwc41hmqfg" path="res://menu/options_menu/keybind_option.tscn" id="18_4571d"]
+
+[sub_resource type="Gradient" id="Gradient_q0b0g"]
+colors = PackedColorArray(0.252, 0.28, 0.28, 1, 0, 0.656784, 0.658214, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_kd5hc"]
+gradient = SubResource("Gradient_q0b0g")
+fill_to = Vector2(0, 1)
+
+[node name="OptionsMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_63gep")
+script = ExtResource("2_rkcsq")
+
+[node name="Background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_kd5hc")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+text = "Options"
+horizontal_alignment = 1
+
+[node name="TabContainer" type="TabContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+tab_alignment = 1
+current_tab = 0
+
+[node name="Audio" type="TabBar" parent="MarginContainer/VBoxContainer/TabContainer"]
+layout_mode = 2
+script = ExtResource("3_g02p7")
+metadata/_tab_index = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/TabContainer/Audio"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="VolumeSliderContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/Audio/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="MasterVolumeOption" parent="MarginContainer/VBoxContainer/TabContainer/Audio/MarginContainer/VolumeSliderContainer" instance=ExtResource("3_22gke")]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Video" type="TabBar" parent="MarginContainer/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+script = ExtResource("5_exke4")
+metadata/_tab_index = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/TabContainer/Video"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="GridContainer" type="GridContainer" parent="MarginContainer/VBoxContainer/TabContainer/Video/MarginContainer"]
+layout_mode = 2
+theme_override_constants/v_separation = 8
+columns = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Video/MarginContainer/GridContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Window Mode"
+
+[node name="WindowModeOptionButton" type="OptionButton" parent="MarginContainer/VBoxContainer/TabContainer/Video/MarginContainer/GridContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="MarginContainer/VBoxContainer/TabContainer/Video/MarginContainer/GridContainer"]
+layout_mode = 2
+text = "Resolution"
+
+[node name="ResolutionOptionButton" type="OptionButton" parent="MarginContainer/VBoxContainer/TabContainer/Video/MarginContainer/GridContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Controls" type="TabBar" parent="MarginContainer/VBoxContainer/TabContainer"]
+visible = false
+layout_mode = 2
+script = ExtResource("17_4gdli")
+metadata/_tab_index = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer/TabContainer/Controls"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/TabContainer/Controls/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_left = 32
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 32
+theme_override_constants/margin_bottom = 32
+
+[node name="KeybindOptionContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/TabContainer/Controls/ScrollContainer/MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="KeybindOption" parent="MarginContainer/VBoxContainer/TabContainer/Controls/ScrollContainer/MarginContainer/KeybindOptionContainer" instance=ExtResource("18_4571d")]
+layout_mode = 2
+
+[node name="CloseButton" type="Button" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(300, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+text = "Close"
+
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/TabContainer/Video/MarginContainer/GridContainer/WindowModeOptionButton" to="MarginContainer/VBoxContainer/TabContainer/Video" method="_on_window_mode_option_button_item_selected"]
+[connection signal="item_selected" from="MarginContainer/VBoxContainer/TabContainer/Video/MarginContainer/GridContainer/ResolutionOptionButton" to="MarginContainer/VBoxContainer/TabContainer/Video" method="_on_resolution_option_button_item_selected"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/CloseButton" to="." method="_on_close_button_pressed"]
