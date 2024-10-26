@@ -14,21 +14,21 @@ text = "action"
 
 [node name="Button1" type="Button" parent="."]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(120, 0)
+custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
 toggle_mode = true
 text = "NA"
 
 [node name="Button2" type="Button" parent="."]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(120, 0)
+custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
 toggle_mode = true
 text = "NA"
 
 [node name="Button3" type="Button" parent="."]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(120, 0)
+custom_minimum_size = Vector2(75, 0)
 layout_mode = 2
 toggle_mode = true
 text = "NA"

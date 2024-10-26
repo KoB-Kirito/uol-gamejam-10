@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://autoloads/pause_menu.gd" id="1_ma3iv"]
 [ext_resource type="PackedScene" uid="uid://csligmwblw82j" path="res://menu/options_menu/options_menu.tscn" id="2_5pl4g"]
-[ext_resource type="Theme" path="res://menu/theme.tres" id="2_k7txe"]
+[ext_resource type="Theme" uid="uid://c46na1j7c1bq" path="res://menu/theme.tres" id="2_k7txe"]
 
 [sub_resource type="Gradient" id="Gradient_jqtjp"]
 colors = PackedColorArray(0.02, 0, 0, 0.752941, 0.56, 0, 0, 0.752941)
