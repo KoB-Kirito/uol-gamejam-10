@@ -1,10 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cjhqp27ywgf3f"]
+[gd_scene load_steps=6 format=3 uid="uid://cjhqp27ywgf3f"]
 
 [ext_resource type="PackedScene" uid="uid://f4jf1c4v6ts5" path="res://enemies/_base_enemy.tscn" id="1_73apd"]
 [ext_resource type="Script" path="res://enemies/enemy_path.gd" id="2_fhum7"]
 [ext_resource type="PackedScene" uid="uid://d1nwfcr0d5o1x" path="res://player.tscn" id="3_so36t"]
 [ext_resource type="Texture2D" uid="uid://ts0cimfv1f58" path="res://icon.svg" id="5_dppyt"]
-[ext_resource type="PackedScene" uid="uid://t67f5hvq5nio" path="res://player/footprint.tscn" id="5_pxpck"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3n005"]
 size = Vector2(439, 34)
@@ -18,13 +17,9 @@ position = Vector2(270, 94)
 rotation = -0.153589
 path = NodePath("../Enemy Path")
 defaultPatrolPause = 0.4
-investigationDuration = 5.0
-newInvestigationPause = 0.5
-finishInvestigationPause = 0.1
-randomSuspicionPause = 2.0
+canSee = false
 blindnessRadius = 20.0
 investigationCooldown = 1.0
-randomSuspicionInterval = 5.0
 
 [node name="Enemy Path" type="Node2D" parent="." node_paths=PackedStringArray("pathNodesParent", "debugLine")]
 script = ExtResource("2_fhum7")
@@ -44,7 +39,7 @@ position = Vector2(107, 294)
 position = Vector2(287, 255)
 
 [node name="Node2D4" type="Node2D" parent="Enemy Path/Path Nodes"]
-position = Vector2(204, 108)
+position = Vector2(207, 99)
 
 [node name="Line2D" type="Line2D" parent="Enemy Path"]
 
@@ -65,13 +60,3 @@ shape = SubResource("RectangleShape2D_3n005")
 [node name="Sprite2D" type="Sprite2D" parent="Node2D2/Wall"]
 scale = Vector2(3.4375, 0.328125)
 texture = ExtResource("5_dppyt")
-
-[node name="Footprint" parent="." instance=ExtResource("5_pxpck")]
-position = Vector2(375.072, -3.84696)
-scale = Vector2(0.28, 0.28)
-lifetime = 8.0
-
-[node name="Footprint2" parent="." instance=ExtResource("5_pxpck")]
-position = Vector2(687, -1)
-scale = Vector2(0.28, 0.28)
-lifetime = 16.0
