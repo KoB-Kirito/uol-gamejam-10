@@ -21,13 +21,15 @@ func _ready() -> void:
 func _on_start_button_pressed() -> void:
 	%StartButton.mouse_exited.disconnect(_on_start_button_mouse_exited)
 	%StartButton.pressed.disconnect(_on_start_button_pressed)
+	$OptionsButton.mouse_exited.disconnect(_on_options_button_mouse_exited)
+	$ExitButton.mouse_exited.disconnect(_on_exit_button_mouse_exited)
 	
 	%snd_select.play()
 	%Blood.show()
 	
 	Bgm.fade_out(0.5)
 	
-	await %snd_select.finished
+	await get_tree().create_timer(1.5).timeout
 	
 	# start normal game
 	PauseMenu.enable()
