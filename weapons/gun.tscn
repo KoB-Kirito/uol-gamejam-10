@@ -37,8 +37,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_uddha"]
 _data = {
-&"RESET": SubResource("Animation_olh0g"),
-&"shoot": SubResource("Animation_yhgd4")
+&"shoot": SubResource("Animation_yhgd4"),
+&"RESET": SubResource("Animation_olh0g")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hl0mm"]
@@ -48,7 +48,6 @@ size = Vector2(31, 8)
 script = ExtResource("1_nvh88")
 bullet = ExtResource("2_y752r")
 knockback = 200.0
-IsEquipped = true
 AimBounces = 10
 AimRange = 3000
 
