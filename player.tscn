@@ -1,24 +1,39 @@
-[gd_scene load_steps=21 format=3 uid="uid://d1nwfcr0d5o1x"]
+[gd_scene load_steps=28 format=3 uid="uid://d1nwfcr0d5o1x"]
 
 [ext_resource type="Script" path="res://character_body_2d.gd" id="1_5xmsr"]
 [ext_resource type="Texture2D" uid="uid://cn0sp58u03y2q" path="res://player/Sprites/Snipy_AU_Laufen_Seite.png" id="2_1vbb6"]
 [ext_resource type="Texture2D" uid="uid://bvg2igesrvlms" path="res://player/Sprites/Snipey_stehend_ohne_Waffe.png" id="2_6s35x"]
 [ext_resource type="Texture2D" uid="uid://my0cdd0edkbv" path="res://player/Sprites/PlayerSprite.png" id="2_iugwe"]
 [ext_resource type="Texture2D" uid="uid://dsyew0viqq3w2" path="res://player/Sprites/SP_AU_Vorne_Laufen1.png" id="2_s4gs4"]
+[ext_resource type="Texture2D" uid="uid://d7nehdx70rmw" path="res://player/Sprites/NoWeapon_Idl_Down.png" id="2_sxbih"]
 [ext_resource type="Texture2D" uid="uid://c05m88dexdeib" path="res://player/Sprites/SP_AU_Vorne_Laufen2.png" id="3_1lrf5"]
 [ext_resource type="Texture2D" uid="uid://cqx7bng4i62tl" path="res://player/Sprites/Snipy_AU_Stehen_Seite.png" id="3_awduc"]
+[ext_resource type="Texture2D" uid="uid://b31q7h1p5m5ao" path="res://player/Sprites/NoWeapon_Run_Down1.png" id="3_dbw2v"]
 [ext_resource type="Texture2D" uid="uid://do8dbqs0nqetk" path="res://player/Sprites/Player_WithBow.png" id="3_kyjwm"]
+[ext_resource type="Texture2D" uid="uid://3uplvcyaw1s4" path="res://player/Sprites/NoWeapon_Run_Down2.png" id="4_07pp4"]
 [ext_resource type="Texture2D" uid="uid://cmcdr1fykx22v" path="res://player/Sprites/SP_Hinten_Laufen1.png" id="4_s0m3x"]
 [ext_resource type="Texture2D" uid="uid://gukgflh07u3g" path="res://player/Sprites/SP_AU_Vorne_Laufen3.png" id="4_tvovo"]
+[ext_resource type="Texture2D" uid="uid://cu5ftl0tr8qfh" path="res://player/Sprites/NoWeapon_Idl_Up.png" id="4_w3qgh"]
 [ext_resource type="Script" path="res://aim.gd" id="4_ywamx"]
 [ext_resource type="Script" path="res://camera.gd" id="5_ln3gc"]
 [ext_resource type="Script" path="res://player/player_boots.gd" id="6_x72yt"]
+[ext_resource type="Texture2D" uid="uid://4epgk1sl17de" path="res://player/Sprites/NoWeapon_Run_Up1.png" id="7_g4j6x"]
 [ext_resource type="PackedScene" uid="uid://t67f5hvq5nio" path="res://player/footprint.tscn" id="7_o3oni"]
+[ext_resource type="Texture2D" uid="uid://crbnf1nfistry" path="res://player/Sprites/Snipey_laufend_ohne_Waffe.png" id="7_qblvm"]
+[ext_resource type="Texture2D" uid="uid://cqrtr8y4fwrbu" path="res://player/Sprites/NoWeapon_Run_Up2.png" id="8_atlnt"]
 [ext_resource type="Texture2D" uid="uid://chmvbdok4rie1" path="res://player/Sprites/SP_Hinten_Laufen2.png" id="9_sk4yy"]
 [ext_resource type="Texture2D" uid="uid://b486ur0wyaa3g" path="res://player/Sprites/SP_Hinten_Laufen3.png" id="10_h5pyh"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_nr6fr"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_sxbih")
+}],
+"loop": true,
+"name": &"_idle_down",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": ExtResource("2_6s35x")
@@ -27,9 +42,45 @@ animations = [{
 "name": &"_idle_side",
 "speed": 5.0
 }, {
-"frames": [],
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_w3qgh")
+}],
+"loop": true,
+"name": &"_idle_up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_dbw2v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_07pp4")
+}],
+"loop": true,
+"name": &"_run_down",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_6s35x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_qblvm")
+}],
 "loop": true,
 "name": &"_run_side",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_g4j6x")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_atlnt")
+}],
+"loop": true,
+"name": &"_run_up",
 "speed": 5.0
 }, {
 "frames": [{
@@ -125,7 +176,7 @@ aim = NodePath("Aim")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_nr6fr")
-animation = &"bow_run_side"
+animation = &"_run_side"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
