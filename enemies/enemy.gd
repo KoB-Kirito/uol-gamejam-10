@@ -46,12 +46,17 @@ var is_turning = false
 
 var is_waiting = false
 
+var currentMotion : Vector2
+var prevPosition : Vector2
+
 signal died(enemy: Enemy)
 
 func _ready() -> void:
 	if path == null:
 		canMove = false
 		return
+	
+	currentMotion = Vector2(0,0)
 	
 	path.update_path()
 	pathPoints = path.get_path_points()
@@ -69,9 +74,12 @@ func _physics_process(delta: float) -> void:
 	%AnimatedSprite2D.position = position
 	
 	if !canMove || is_waiting:
+		currentMotion = Vector2(0,0)
 		return
 	
 	if is_turning:
+		currentMotion = Vector2(0,0)
+		
 		curRotation += delta * turnSpeed
 		
 		global_rotation = rotate_toward(initRotation, desRotation, curRotation)
@@ -86,6 +94,9 @@ func _physics_process(delta: float) -> void:
 		investigateMove(delta)
 	else:
 		patrol(delta)
+	
+	currentMotion = global_position - prevPosition
+	prevPosition = global_position
 
 func advance():
 	advanceFlag = true
@@ -160,6 +171,7 @@ func patrol(delta : float):
 		
 	var newPos = pathPoints[curNode] + subPath.normalized() * t
 	global_position = newPos
+	move_and_slide()
 	
 	susT += delta
 	if susT >= randomSuspicionInterval:
