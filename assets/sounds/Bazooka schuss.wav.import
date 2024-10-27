@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://g12s2xhv8xhe"
+path="res://.godot/imported/Bazooka schuss.wav-8a0da3ffaad0144523b50a0c56c1375e.sample"
+
+[deps]
+
+source_file="res://assets/sounds/Bazooka schuss.wav"
+dest_files=["res://.godot/imported/Bazooka schuss.wav-8a0da3ffaad0144523b50a0c56c1375e.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=2

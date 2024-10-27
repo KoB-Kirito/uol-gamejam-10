@@ -1,9 +1,15 @@
-[gd_scene load_steps=6 format=3 uid="uid://dn4dashthsf4l"]
+[gd_scene load_steps=25 format=3 uid="uid://dn4dashthsf4l"]
 
 [ext_resource type="Theme" uid="uid://c46na1j7c1bq" path="res://menu/theme.tres" id="1_xjn03"]
 [ext_resource type="Script" path="res://menu/main_menu/main_menu.gd" id="2_opjhm"]
 [ext_resource type="Script" path="res://autoloads/transition_data_out.gd" id="3_81j5b"]
 [ext_resource type="PackedScene" uid="uid://csligmwblw82j" path="res://menu/options_menu/options_menu.tscn" id="3_d7lqq"]
+[ext_resource type="Texture2D" uid="uid://dwamalesv65ip" path="res://menu/main_menu/menu.png" id="4_o7bob"]
+[ext_resource type="AudioStream" uid="uid://bljadmv6syq8" path="res://menu/main_menu/menu_music.ogg" id="4_vs8na"]
+[ext_resource type="Texture2D" uid="uid://cjq6ypxwftfcx" path="res://menu/main_menu/menu_weapon.png" id="5_rfqvc"]
+[ext_resource type="Texture2D" uid="uid://b66n8gnjjyvuf" path="res://menu/main_menu/blood.png" id="6_cuoid"]
+[ext_resource type="AudioStream" uid="uid://b251rvn015p7c" path="res://assets/sounds/Bogen schuss.wav" id="9_4x7km"]
+[ext_resource type="AudioStream" uid="uid://cmlepq7p72qvb" path="res://assets/sounds/Bazooka Explosion.wav" id="10_06xwc"]
 
 [sub_resource type="Resource" id="Resource_7jpxi"]
 script = ExtResource("3_81j5b")
@@ -11,6 +17,32 @@ scene_path = "res://level/level_1.tscn"
 transition = 1
 color = Color(0, 0, 0, 1)
 duration = 1.0
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pgyps"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oydii"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_u8mmd"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wy2q1"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_wy5ib"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ofipr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_pfxwr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_55xnr"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lqo7c"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_qb3e5"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ogdco"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_x4knn"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_kl046"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -22,48 +54,110 @@ grow_vertical = 2
 theme = ExtResource("1_xjn03")
 script = ExtResource("2_opjhm")
 next_level = SubResource("Resource_7jpxi")
+bgm = ExtResource("4_vs8na")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="TextureRect" type="TextureRect" parent="."]
+texture_filter = 1
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
+anchors_preset = 15
+anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = -65.5
-offset_top = -217.0
-offset_right = 65.5
-offset_bottom = -50.0
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
+texture = ExtResource("4_o7bob")
 
-[node name="StartButton" type="Button" parent="VBoxContainer"]
+[node name="StartButton" type="Button" parent="."]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
-text = "Start"
+offset_left = 123.0
+offset_top = 72.0
+offset_right = 362.0
+offset_bottom = 167.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_pgyps")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_oydii")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_u8mmd")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_wy2q1")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_wy5ib")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ofipr")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_pfxwr")
 
-[node name="FreeButton" type="Button" parent="VBoxContainer"]
+[node name="StartHover" type="Sprite2D" parent="StartButton"]
+unique_name_in_owner = true
 visible = false
-custom_minimum_size = Vector2(220, 0)
-layout_mode = 2
-text = "Other Mode"
+position = Vector2(98, 47)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("5_rfqvc")
 
-[node name="OptionsButton" type="Button" parent="VBoxContainer"]
-custom_minimum_size = Vector2(220, 0)
-layout_mode = 2
-text = "Options"
+[node name="Blood" type="Sprite2D" parent="StartButton"]
+unique_name_in_owner = true
+visible = false
+texture_filter = 1
+position = Vector2(207, 21)
+texture = ExtResource("6_cuoid")
 
-[node name="ExitButton" type="Button" parent="VBoxContainer"]
+[node name="OptionsButton" type="Button" parent="."]
 custom_minimum_size = Vector2(220, 0)
 layout_mode = 2
-text = "Exit"
+offset_left = 119.0
+offset_top = 196.0
+offset_right = 359.0
+offset_bottom = 288.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_pgyps")
+theme_override_styles/disabled = SubResource("StyleBoxEmpty_oydii")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_u8mmd")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_wy2q1")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_wy5ib")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ofipr")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_pfxwr")
+
+[node name="StartHover2" type="Sprite2D" parent="OptionsButton"]
+unique_name_in_owner = true
+visible = false
+position = Vector2(102, 46)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("5_rfqvc")
+
+[node name="ExitButton" type="Button" parent="."]
+custom_minimum_size = Vector2(220, 0)
+layout_mode = 2
+offset_left = 121.0
+offset_top = 315.0
+offset_right = 357.0
+offset_bottom = 407.0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_55xnr")
+theme_override_styles/hover_pressed_mirrored = SubResource("StyleBoxEmpty_lqo7c")
+theme_override_styles/hover_pressed = SubResource("StyleBoxEmpty_qb3e5")
+theme_override_styles/hover = SubResource("StyleBoxEmpty_ogdco")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_x4knn")
+theme_override_styles/normal = SubResource("StyleBoxEmpty_kl046")
+
+[node name="StartHover3" type="Sprite2D" parent="ExitButton"]
+unique_name_in_owner = true
+visible = false
+position = Vector2(97, 42)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("5_rfqvc")
 
 [node name="OptionsMenu" parent="." instance=ExtResource("3_d7lqq")]
 unique_name_in_owner = true
 visible = false
 layout_mode = 1
 
-[connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_start_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/FreeButton" to="." method="_on_free_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/OptionsButton" to="." method="_on_options_button_pressed"]
-[connection signal="pressed" from="VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[node name="snd_hover" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("9_4x7km")
+
+[node name="snd_select" type="AudioStreamPlayer" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("10_06xwc")
+
+[connection signal="mouse_entered" from="StartButton" to="." method="_on_start_button_mouse_entered"]
+[connection signal="mouse_exited" from="StartButton" to="." method="_on_start_button_mouse_exited"]
+[connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
+[connection signal="mouse_entered" from="OptionsButton" to="." method="_on_options_button_mouse_entered"]
+[connection signal="mouse_exited" from="OptionsButton" to="." method="_on_options_button_mouse_exited"]
+[connection signal="pressed" from="OptionsButton" to="." method="_on_options_button_pressed"]
+[connection signal="mouse_entered" from="ExitButton" to="." method="_on_exit_button_mouse_entered"]
+[connection signal="mouse_exited" from="ExitButton" to="." method="_on_exit_button_mouse_exited"]
+[connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]

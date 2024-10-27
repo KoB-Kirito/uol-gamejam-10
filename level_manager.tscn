@@ -1,9 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://ch3u4v7tets38"]
+[gd_scene load_steps=4 format=3 uid="uid://ch3u4v7tets38"]
 
 [ext_resource type="Script" path="res://level_manager.gd" id="1_mbl6h"]
+[ext_resource type="AudioStream" uid="uid://dgqnk1e4a7jsf" path="res://assets/music/main_theme.mp3" id="2_vx878"]
+[ext_resource type="AudioStream" uid="uid://ctlvc6ypemwvh" path="res://assets/music/main_theme_short.mp3" id="3_ftkfw"]
 
 [node name="LevelManager" type="Node"]
 script = ExtResource("1_mbl6h")
+bgm = ExtResource("2_vx878")
+win = ExtResource("3_ftkfw")
 
 [node name="ScoreboardLayer" type="CanvasLayer" parent="."]
 unique_name_in_owner = true

@@ -8,6 +8,9 @@ signal enemy_died(enemy)
 @export var camBoundBotRight : Vector2
 @export var camBoundTopLeft : Vector2
 @export_file("*.tscn") var next_level: String
+@export var bgm: AudioStream
+@export var win: AudioStream
+
 
 var enemies: Array[Enemy]
 var player : Node2D
@@ -31,6 +34,9 @@ func _ready() -> void:
 	print_debug("found ", enemies.size(), " enemies")
 	
 	SceneTransition.fade_in()
+	
+	if bgm:
+		Bgm.fade_to(bgm, 0.0, 0.5)
 
 
 func on_enemy_died(enemy: Enemy) -> void:
@@ -44,6 +50,8 @@ func on_enemy_died(enemy: Enemy) -> void:
 
 
 func win_level():
+	Bgm.fade_to(win, -6.0, 0.5)
+	
 	# show scoreboard
 	%ScoreboardLayer.show()
 
@@ -51,3 +59,8 @@ func win_level():
 func _on_scoreboard_gui_input(event: InputEvent) -> void:
 	if event.is_pressed():
 		get_tree().change_scene_to_file(next_level)
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("restart"):
+		get_tree().reload_current_scene()
