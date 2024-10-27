@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://bkmd2osothdin"]
 
-[ext_resource type="Script" path="res://Arrow.gd" id="1_kn546"]
+[ext_resource type="Script" path="res://weapons/Arrow.gd" id="1_kn546"]
 [ext_resource type="Texture2D" uid="uid://ts0cimfv1f58" path="res://icon.svg" id="2_5xcp0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d7y1m"]
@@ -10,6 +10,7 @@ size = Vector2(29, 29)
 radius = 25.0
 
 [node name="Arrow" type="CharacterBody2D"]
+top_level = true
 scale = Vector2(0.25, 0.25)
 collision_layer = 4
 collision_mask = 21

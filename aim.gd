@@ -14,11 +14,7 @@ var distanceLimit = 3000
 const errorCorr = 1
 
 func _ready():
-	line.add_point(Vector2(0,0))
-	line.width=1
-	line.default_color=Color.RED
-	for i in range(stepsCount):
-		line.add_point(Vector2(0,0))
+	update_aim()
 
 func _physics_process(delta: float) -> void:
 	global_position = player.global_position
@@ -75,3 +71,13 @@ func setAimSettings(MaxBounces:int,MaxDistance:int):
 	stepsCount=MaxBounces
 	distanceLimit=MaxDistance
 	
+	update_aim()
+	
+func update_aim():
+	line.clear_points()
+	
+	line.add_point(Vector2(0,0))
+	line.width=1
+	line.default_color=Color.RED
+	for i in range(stepsCount):
+		line.add_point(Vector2(0,0))

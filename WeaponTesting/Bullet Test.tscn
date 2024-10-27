@@ -1,9 +1,9 @@
 [gd_scene load_steps=8 format=3 uid="uid://bunl221tmjvo2"]
 
-[ext_resource type="Texture2D" uid="uid://ts0cimfv1f58" path="res://icon.svg" id="1_ohy3h"]
-[ext_resource type="PackedScene" uid="uid://d1nwfcr0d5o1x" path="res://player.tscn" id="2_vxjry"]
-[ext_resource type="PackedScene" uid="uid://f4jf1c4v6ts5" path="res://enemies/_base_enemy.tscn" id="3_aexe3"]
-[ext_resource type="Script" path="res://pathing_test.gd" id="5_qc72l"]
+[ext_resource type="Texture2D" uid="uid://ts0cimfv1f58" path="res://icon.svg" id="1_rdtyh"]
+[ext_resource type="PackedScene" uid="uid://f4jf1c4v6ts5" path="res://enemies/_base_enemy.tscn" id="2_18ymc"]
+[ext_resource type="Script" path="res://pathing_test.gd" id="3_tqtw7"]
+[ext_resource type="PackedScene" uid="uid://d1nwfcr0d5o1x" path="res://player.tscn" id="4_m3ncq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_0bbae"]
 size = Vector2(439, 34)
@@ -27,7 +27,7 @@ shape = SubResource("RectangleShape2D_0bbae")
 
 [node name="Sprite2D" type="Sprite2D" parent="Node2D/Wall"]
 scale = Vector2(3.4375, 0.328125)
-texture = ExtResource("1_ohy3h")
+texture = ExtResource("1_rdtyh")
 
 [node name="Node2D2" type="Node2D" parent="."]
 position = Vector2(514, 1047)
@@ -42,21 +42,21 @@ shape = SubResource("RectangleShape2D_0bbae")
 
 [node name="Sprite2D" type="Sprite2D" parent="Node2D2/Wall"]
 scale = Vector2(3.4375, 0.328125)
-texture = ExtResource("1_ohy3h")
+texture = ExtResource("1_rdtyh")
 
-[node name="EnemyBase" parent="." instance=ExtResource("3_aexe3")]
+[node name="EnemyBase" parent="." instance=ExtResource("2_18ymc")]
 position = Vector2(859, 933)
 
-[node name="EnemyBase2" parent="." instance=ExtResource("3_aexe3")]
+[node name="EnemyBase2" parent="." instance=ExtResource("2_18ymc")]
 position = Vector2(259, 957)
 
-[node name="EnemyBase3" parent="." instance=ExtResource("3_aexe3")]
+[node name="EnemyBase3" parent="." instance=ExtResource("2_18ymc")]
 position = Vector2(908, 455)
 
 [node name="Pathing" type="Node2D" parent="." node_paths=PackedStringArray("target")]
 visible = false
 scale = Vector2(0.475, 14.705)
-script = ExtResource("5_qc72l")
+script = ExtResource("3_tqtw7")
 path = Array[Vector2]([Vector2(0, 0), Vector2(908, 455), Vector2(859, 933), Vector2(259, 957)])
 bulletSpeed = 200
 target = NodePath("Sprite2D")
@@ -65,5 +65,5 @@ target = NodePath("Sprite2D")
 scale = Vector2(2.2443, 0.0661476)
 texture = SubResource("GradientTexture2D_dwiwd")
 
-[node name="Player" parent="." instance=ExtResource("2_vxjry")]
+[node name="Player" parent="." instance=ExtResource("4_m3ncq")]
 collision_mask = 17

@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://character_body_2d.gd" id="1_5xmsr"]
 [ext_resource type="Texture2D" uid="uid://my0cdd0edkbv" path="res://Sprites/PlayerSprite.png" id="2_iugwe"]
-[ext_resource type="PackedScene" uid="uid://bvfwp4bvyktui" path="res://gun.tscn" id="3_lqo5j"]
+[ext_resource type="PackedScene" uid="uid://bvfwp4bvyktui" path="res://weapons/gun.tscn" id="3_lqo5j"]
 [ext_resource type="Script" path="res://aim.gd" id="4_ywamx"]
 [ext_resource type="Script" path="res://camera.gd" id="5_ln3gc"]
 [ext_resource type="Script" path="res://player/player_boots.gd" id="6_x72yt"]
