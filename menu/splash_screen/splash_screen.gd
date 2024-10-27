@@ -46,4 +46,5 @@ func _ready() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_pressed():
 		tween.stop()
+		scene_transition.duration = 0.0
 		SceneTransition.fade_out_change_scene(scene_transition)
