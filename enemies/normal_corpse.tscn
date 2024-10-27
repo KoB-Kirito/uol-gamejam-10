@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://vuvv5akkgkvf"]
+
+[ext_resource type="Texture2D" uid="uid://cwbky23daalqa" path="res://enemies/M_tot.png" id="1_hbrr0"]
+
+[node name="NormalCorpse" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_hbrr0")

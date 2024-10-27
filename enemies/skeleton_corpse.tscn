@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://bwu0t1yubmjo8"]
+
+[ext_resource type="Texture2D" uid="uid://c40lmumxmatdw" path="res://enemies/Skelett_tot.png" id="1_cft6w"]
+
+[node name="SkeletonCorpse" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_cft6w")

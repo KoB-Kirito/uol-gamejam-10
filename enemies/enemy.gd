@@ -28,6 +28,9 @@ extends CharacterBody2D
 @export var observingInterval : float
 @export var observingChance : float
 
+@export_group("Other")
+@export var corpse : PackedScene
+
 @onready var timer = $Timer
 @onready var turnTimer = $TurnTimer
 @onready var observTimer = $ObservTimer
@@ -232,6 +235,9 @@ func _on_hurtbox_body_entered(body: Node2D) -> void:
 
 func die() -> void:
 	#TODO: animation
+	var newCorpse = corpse.instantiate()
+	get_parent().add_child(newCorpse)
+	newCorpse.global_position = global_position
 	
 	died.emit(self)
 	queue_free()

@@ -1,6 +1,7 @@
-[gd_scene load_steps=18 format=3 uid="uid://f4jf1c4v6ts5"]
+[gd_scene load_steps=19 format=3 uid="uid://f4jf1c4v6ts5"]
 
 [ext_resource type="Script" path="res://enemies/enemy.gd" id="1_cobw7"]
+[ext_resource type="PackedScene" uid="uid://vuvv5akkgkvf" path="res://enemies/normal_corpse.tscn" id="2_ao4dx"]
 [ext_resource type="Texture2D" uid="uid://ts0cimfv1f58" path="res://icon.svg" id="2_nkbw1"]
 [ext_resource type="Script" path="res://enemies/enemy_sight.gd" id="3_jy42g"]
 [ext_resource type="Texture2D" uid="uid://cwjoc5g8gqwrr" path="res://enemies/vision_cone.png" id="4_o7qxw"]
@@ -119,6 +120,7 @@ moveSpeedMultiplier = 2.0
 turnSpeedMultiplier = 2.0
 observingInterval = 2.0
 observingChance = 0.5
+corpse = ExtResource("2_ao4dx")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
