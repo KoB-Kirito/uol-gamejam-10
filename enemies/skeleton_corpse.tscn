@@ -1,8 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://bwu0t1yubmjo8"]
+[gd_scene load_steps=3 format=3 uid="uid://bwu0t1yubmjo8"]
 
 [ext_resource type="Texture2D" uid="uid://c40lmumxmatdw" path="res://enemies/Skelett_tot.png" id="1_cft6w"]
+[ext_resource type="AudioStream" uid="uid://b64w6ldcr8wln" path="res://assets/sounds/gegner tod.wav" id="2_5h34v"]
 
 [node name="SkeletonCorpse" type="Node2D"]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_cft6w")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_5h34v")
+volume_db = 3.566
+autoplay = true
