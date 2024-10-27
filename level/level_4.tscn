@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=4 uid="uid://bkw06dw2xpcs0"]
 
 [ext_resource type="TileSet" uid="uid://sij1top5ar0l" path="res://level/tileset_background.tres" id="1_me4ny"]
-[ext_resource type="TileSet" uid="uid://ce0pnlau04gbk" path="res://level/tileset.tres" id="2_go0yr"]
+[ext_resource type="TileSet" uid="uid://c7n2ro5k1kied" path="res://level/tileset.tres" id="2_go0yr"]
 [ext_resource type="PackedScene" uid="uid://ch3u4v7tets38" path="res://level_manager.tscn" id="3_jgui6"]
 [ext_resource type="PackedScene" uid="uid://d1nwfcr0d5o1x" path="res://player.tscn" id="4_s4p3j"]
 [ext_resource type="PackedScene" uid="uid://f4jf1c4v6ts5" path="res://enemies/_base_enemy.tscn" id="5_7djl7"]

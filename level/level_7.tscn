@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=4 uid="uid://bhy5ummssqwlo"]
 
 [ext_resource type="TileSet" uid="uid://sij1top5ar0l" path="res://level/tileset_background.tres" id="1_3087e"]
-[ext_resource type="TileSet" uid="uid://ce0pnlau04gbk" path="res://level/tileset.tres" id="2_r4i3p"]
+[ext_resource type="TileSet" uid="uid://c7n2ro5k1kied" path="res://level/tileset.tres" id="2_r4i3p"]
 [ext_resource type="PackedScene" uid="uid://ch3u4v7tets38" path="res://level_manager.tscn" id="3_efmau"]
 [ext_resource type="PackedScene" uid="uid://d1nwfcr0d5o1x" path="res://player.tscn" id="4_yqoif"]
 [ext_resource type="PackedScene" uid="uid://f4jf1c4v6ts5" path="res://enemies/_base_enemy.tscn" id="5_f5sia"]
@@ -28,13 +28,13 @@ friction = 0.3
 acceleration = 0.4
 
 [node name="EnemyBase1" parent="." instance=ExtResource("5_f5sia")]
-position = Vector2(590, 500)
+position = Vector2(590, 470)
 rotation = 1.5708
 
 [node name="EnemyBase2" parent="." instance=ExtResource("5_f5sia")]
-position = Vector2(700, 600)
+position = Vector2(740, 600)
 rotation = -1.5708
 
 [node name="EnemyBase3" parent="." instance=ExtResource("5_f5sia")]
-position = Vector2(480, 600)
+position = Vector2(440, 600)
 rotation = -1.5708

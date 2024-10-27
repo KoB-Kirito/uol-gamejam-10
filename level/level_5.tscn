@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=4 uid="uid://b537lydxq1isn"]
 
 [ext_resource type="TileSet" uid="uid://sij1top5ar0l" path="res://level/tileset_background.tres" id="1_n5rwf"]
-[ext_resource type="TileSet" uid="uid://ce0pnlau04gbk" path="res://level/tileset.tres" id="2_nwgln"]
+[ext_resource type="TileSet" uid="uid://c7n2ro5k1kied" path="res://level/tileset.tres" id="2_nwgln"]
 [ext_resource type="PackedScene" uid="uid://ch3u4v7tets38" path="res://level_manager.tscn" id="3_kjp34"]
 [ext_resource type="PackedScene" uid="uid://d1nwfcr0d5o1x" path="res://player.tscn" id="4_rcphu"]
 [ext_resource type="PackedScene" uid="uid://f4jf1c4v6ts5" path="res://enemies/_base_enemy.tscn" id="5_1ncph"]
@@ -29,9 +29,9 @@ friction = 0.3
 acceleration = 0.4
 
 [node name="EnemyBase1" parent="." node_paths=PackedStringArray("path") instance=ExtResource("5_1ncph")]
-position = Vector2(500, 540)
+position = Vector2(380, 580)
+rotation = 1.5708
 path = NodePath("../Path1")
-moveSpeed = 50
 
 [node name="EnemyBase2" parent="." instance=ExtResource("5_1ncph")]
 position = Vector2(700, 700)
@@ -48,7 +48,7 @@ waitTimes = Array[float]([0.0, 0.0])
 [node name="Node2D" type="Node2D" parent="Path1"]
 
 [node name="Node2D" type="Node2D" parent="Path1/Node2D"]
-position = Vector2(540, 540)
+position = Vector2(380, 580)
 
 [node name="Node2D2" type="Node2D" parent="Path1/Node2D"]
-position = Vector2(380, 580)
+position = Vector2(540, 540)

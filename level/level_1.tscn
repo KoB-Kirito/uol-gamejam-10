@@ -2,7 +2,7 @@
 
 [ext_resource type="TileSet" uid="uid://sij1top5ar0l" path="res://level/tileset_background.tres" id="1_of2p6"]
 [ext_resource type="PackedScene" uid="uid://ch3u4v7tets38" path="res://level_manager.tscn" id="1_te1qb"]
-[ext_resource type="TileSet" uid="uid://ce0pnlau04gbk" path="res://level/tileset.tres" id="2_66ev3"]
+[ext_resource type="TileSet" uid="uid://c7n2ro5k1kied" path="res://level/tileset.tres" id="2_66ev3"]
 [ext_resource type="PackedScene" uid="uid://d1nwfcr0d5o1x" path="res://player.tscn" id="2_lveq8"]
 [ext_resource type="PackedScene" uid="uid://f4jf1c4v6ts5" path="res://enemies/_base_enemy.tscn" id="3_4s3ti"]
 [ext_resource type="Script" path="res://enemies/enemy_path.gd" id="6_b3ao7"]
@@ -31,7 +31,6 @@ acceleration = 0.4
 [node name="EnemyBase" parent="." node_paths=PackedStringArray("path") instance=ExtResource("3_4s3ti")]
 position = Vector2(609, 824)
 path = NodePath("../Path")
-moveSpeed = 50
 
 [node name="Path" type="Node2D" parent="." node_paths=PackedStringArray("pathNodesParent")]
 script = ExtResource("6_b3ao7")
