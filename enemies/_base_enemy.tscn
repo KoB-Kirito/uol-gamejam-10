@@ -163,6 +163,7 @@ texture = ExtResource("4_o7qxw")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 unique_name_in_owner = true
 top_level = true
+light_mask = 0
 sprite_frames = SubResource("SpriteFrames_cyohd")
 animation = &"down_walk"
 frame_progress = 0.470962
