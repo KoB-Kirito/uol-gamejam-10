@@ -141,8 +141,10 @@ debugLineLeft = NodePath("Line2D Left")
 debugLineRight = NodePath("Line2D Right")
 
 [node name="Line2D Left" type="Line2D" parent="Enemy Sight"]
+visible = false
 
 [node name="Line2D Right" type="Line2D" parent="Enemy Sight"]
+visible = false
 
 [node name="Timer" type="Timer" parent="."]
 

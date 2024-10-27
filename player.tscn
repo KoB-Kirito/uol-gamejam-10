@@ -54,7 +54,10 @@ top_level = true
 script = ExtResource("5_ln3gc")
 player = NodePath("..")
 
-[node name="Boots" type="Node2D" parent="."]
+[node name="Boots" type="Node2D" parent="." node_paths=PackedStringArray("player")]
+position = Vector2(-9, 15)
 script = ExtResource("6_x72yt")
+player = NodePath("..")
 footprints = ExtResource("7_o3oni")
-dst_between = 100.0
+dst_between = 50.0
+spawnOffset = 2.0
