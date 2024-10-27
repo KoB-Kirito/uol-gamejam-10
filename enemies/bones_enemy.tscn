@@ -1,0 +1,178 @@
+[gd_scene load_steps=18 format=3 uid="uid://0pl8o5y53y1y"]
+
+[ext_resource type="Script" path="res://enemies/enemy.gd" id="1_85srb"]
+[ext_resource type="Texture2D" uid="uid://ts0cimfv1f58" path="res://icon.svg" id="2_37jwh"]
+[ext_resource type="Script" path="res://enemies/enemy_sight.gd" id="3_qkr4c"]
+[ext_resource type="Texture2D" uid="uid://cwjoc5g8gqwrr" path="res://enemies/vision_cone.png" id="4_ydt65"]
+[ext_resource type="Texture2D" uid="uid://0t3q7b16nsl1" path="res://enemies/sprites/bones_front.png" id="5_1rvsw"]
+[ext_resource type="Texture2D" uid="uid://bdbi1jjj6r7gt" path="res://enemies/sprites/bones_front_walk.png" id="6_y3mpy"]
+[ext_resource type="Texture2D" uid="uid://b2tce22f4jpwj" path="res://enemies/sprites/bones_front_walk2.png" id="7_32i8y"]
+[ext_resource type="Texture2D" uid="uid://di4k4g7h28vbo" path="res://enemies/sprites/bones_left_idle.png" id="8_d6hm3"]
+[ext_resource type="Texture2D" uid="uid://bby8heyvt5dsc" path="res://enemies/sprites/bones_left_walk.png" id="9_roqeh"]
+[ext_resource type="Texture2D" uid="uid://cvanb7vj62lhp" path="res://enemies/sprites/bones_right_idle.png" id="10_kjd7c"]
+[ext_resource type="Texture2D" uid="uid://c2q4etlvs8rar" path="res://enemies/sprites/bones_right_walk.png" id="11_b1obc"]
+[ext_resource type="Texture2D" uid="uid://c33cb0humm786" path="res://enemies/sprites/bones_back.png" id="12_07unc"]
+[ext_resource type="Texture2D" uid="uid://nk7io2g5duk6" path="res://enemies/sprites/bones_back_walk2.png" id="13_faf84"]
+[ext_resource type="Texture2D" uid="uid://fx158tg2uxlu" path="res://enemies/sprites/bones_back_walk.png" id="14_8wk1a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yxmdp"]
+size = Vector2(32, 32)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_fxe7l"]
+size = Vector2(32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_4uq76"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("5_1rvsw")
+}],
+"loop": true,
+"name": &"down_idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_y3mpy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_32i8y")
+}],
+"loop": true,
+"name": &"down_walk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_d6hm3")
+}],
+"loop": true,
+"name": &"left_idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_roqeh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_d6hm3")
+}],
+"loop": true,
+"name": &"left_walk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_kjd7c")
+}],
+"loop": true,
+"name": &"right_idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_kjd7c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_b1obc")
+}],
+"loop": true,
+"name": &"right_walk",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("12_07unc")
+}],
+"loop": true,
+"name": &"up_idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_faf84")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_8wk1a")
+}],
+"loop": true,
+"name": &"up_walk",
+"speed": 5.0
+}]
+
+[node name="EnemyBase" type="CharacterBody2D" groups=["enemy"]]
+collision_layer = 2
+collision_mask = 2
+script = ExtResource("1_85srb")
+moveSpeed = 50
+turnSpeed = 1.0
+maxTurnTime = 7.0
+defaultPatrolPause = 4.0
+investigationDuration = 5.0
+newInvestigationPause = 0.5
+finishInvestigationPause = 0.1
+randomSuspicionPause = 2.0
+blindnessRadius = 10.0
+investigationCooldown = 0.1
+randomSuspicionInterval = 5.0
+moveSpeedMultiplier = 2.0
+turnSpeedMultiplier = 2.0
+observingInterval = 2.0
+observingChance = 0.5
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+modulate = Color(1, 0, 0, 1)
+scale = Vector2(0.25, 0.25)
+texture = ExtResource("2_37jwh")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_yxmdp")
+
+[node name="Hurtbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox"]
+shape = SubResource("RectangleShape2D_fxe7l")
+debug_color = Color(0.83421, 0.383626, 0.179764, 0.42)
+
+[node name="Enemy Sight" type="Node2D" parent="." node_paths=PackedStringArray("base_enemy", "debugLineLeft", "debugLineRight")]
+script = ExtResource("3_qkr4c")
+angleSize = 45.0
+length = 300.0
+base_enemy = NodePath("..")
+debugLineLeft = NodePath("Line2D Left")
+debugLineRight = NodePath("Line2D Right")
+
+[node name="Line2D Left" type="Line2D" parent="Enemy Sight"]
+visible = false
+
+[node name="Line2D Right" type="Line2D" parent="Enemy Sight"]
+visible = false
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="TurnTimer" type="Timer" parent="."]
+
+[node name="ObservTimer" type="Timer" parent="."]
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+rotation = 1.5708
+color = Color(1, 0, 0, 1)
+energy = 4.0
+shadow_enabled = true
+texture = ExtResource("4_ydt65")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+unique_name_in_owner = true
+top_level = true
+light_mask = 0
+sprite_frames = SubResource("SpriteFrames_4uq76")
+animation = &"right_idle"
+autoplay = "right_idle"
+
+[connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="TurnTimer" to="." method="_on_turn_timer_timeout"]
+[connection signal="timeout" from="ObservTimer" to="." method="_on_observ_timer_timeout"]
