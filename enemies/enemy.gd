@@ -153,6 +153,7 @@ func die() -> void:
 	queue_free()
 
 func wait(duration : float):
+	timer.stop()
 	is_waiting = true
 	timer.start(duration)
 
@@ -225,6 +226,7 @@ func investigateMove(delta : float):
 		backtrackStack.append(oldPOI)
 		
 		tInv = 0.0
+		wait(.2)
 		return
 		
 	var newPos = backtrackStack[backtrackStack.size() - 1] + subPath.normalized() * tInv
