@@ -58,7 +58,16 @@ func _ready() -> void:
 	
 	advance()
 
+
 func _process(delta: float) -> void:
+	#TODO: animation
+	pass
+
+
+func _physics_process(delta: float) -> void:
+	#HACK: let sprite follow to keep rotation
+	%AnimatedSprite2D.position = position
+	
 	if !canMove || is_waiting:
 		return
 	
