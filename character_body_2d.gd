@@ -4,16 +4,12 @@ extends CharacterBody2D
 @export var speed = 200
 @export var friction = 0.01
 @export var acceleration = 0.1
-@onready var gun := $Gun
+@onready var gun=null
 @export var aim : Aim
-@export var startWithWeapon:bool
 
 
 func _ready() -> void:
-	if not startWithWeapon:
-		gun.queue_free()
-		gun=null
-		aim.setAimSettings(1,0)
+	aim.setAimSettings(1,0)
 	
 func die() -> void:
 	get_tree().reload_current_scene()

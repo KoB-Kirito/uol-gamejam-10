@@ -1,8 +1,7 @@
-[gd_scene load_steps=11 format=3 uid="uid://d1nwfcr0d5o1x"]
+[gd_scene load_steps=10 format=3 uid="uid://d1nwfcr0d5o1x"]
 
 [ext_resource type="Script" path="res://character_body_2d.gd" id="1_5xmsr"]
 [ext_resource type="Texture2D" uid="uid://my0cdd0edkbv" path="res://Sprites/PlayerSprite.png" id="2_iugwe"]
-[ext_resource type="PackedScene" uid="uid://bvfwp4bvyktui" path="res://weapons/gun.tscn" id="3_lqo5j"]
 [ext_resource type="Script" path="res://aim.gd" id="4_ywamx"]
 [ext_resource type="Script" path="res://camera.gd" id="5_ln3gc"]
 [ext_resource type="Script" path="res://player/player_boots.gd" id="6_x72yt"]
@@ -24,15 +23,12 @@ collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_5xmsr")
 aim = NodePath("Aim")
-startWithWeapon = true
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_iugwe")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ouvkn")
-
-[node name="Gun" parent="." instance=ExtResource("3_lqo5j")]
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 

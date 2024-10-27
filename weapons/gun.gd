@@ -13,6 +13,7 @@ extends Node2D
 @export var AimRange:int
 
 var hasBullet:bool=true
+var playerRef:Player=null
 
 func _physics_process(delta: float) -> void:
 	if not IsEquipped:
@@ -37,6 +38,7 @@ func shoot(path:Array[Vector2]) -> bool:
 	
 	b.launch(path)
 	hasBullet=false
+	playerRef.aim.setAimSettings(0,1)
 	return true
 	
 
@@ -44,16 +46,23 @@ func shoot(path:Array[Vector2]) -> bool:
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body is Enemy:
 		return
-	if body == get_parent():
+	if body == get_parent():#technically this shouldnt happen, but i'll just in case
 		area.queue_free()
 		return
 	if body.gun!=null:
 		queue_free()
 		return
+	PickUpWeapon(body)
+	
+func PickUpWeapon(body:Player):
 	reparent(body)
 	position=Vector2(0,0)	
 	body.gun=self
 	body.aim.setAimSettings(AimBounces,AimRange)
-	
 	IsEquipped=true
 	area.queue_free()
+	playerRef=body
+	
+func Reload():#Only used by Bow
+	hasBullet=true
+	playerRef.aim.setAimSettings(AimBounces,AimRange)
