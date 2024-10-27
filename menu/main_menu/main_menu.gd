@@ -32,6 +32,8 @@ func _on_start_button_pressed() -> void:
 	await get_tree().create_timer(1.0).timeout
 	
 	# start normal game
+	Speedrun.start()
+	
 	PauseMenu.enable()
 	
 	SceneTransition.fade_out_change_scene(next_level)
@@ -73,3 +75,8 @@ func _on_exit_button_mouse_entered() -> void:
 
 func _on_exit_button_mouse_exited() -> void:
 	%StartHover3.hide()
+
+
+func _on_title_gui_input(event: InputEvent) -> void:
+	if event.is_pressed():
+		%Title.hide()

@@ -18,6 +18,10 @@ var IsEquipped:bool
 var hasBullet:bool=true
 var playerRef:Player=null
 
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("cheat"):
+		Reload()
+
 func _physics_process(delta: float) -> void:
 	if not IsEquipped:
 		return

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=4 uid="uid://cljbuol3pci1n"]
+[gd_scene load_steps=9 format=4 uid="uid://bwp1wekykv5cr"]
 
 [ext_resource type="TileSet" uid="uid://sij1top5ar0l" path="res://level/tileset_background.tres" id="1_eocc0"]
 [ext_resource type="TileSet" uid="uid://c7n2ro5k1kied" path="res://level/tileset.tres" id="2_s4t2p"]
@@ -24,7 +24,7 @@ tile_set = ExtResource("2_s4t2p")
 
 [node name="LevelManager" parent="." instance=ExtResource("3_vvg8d")]
 camBoundBotRight = Vector2(1792, 1280)
-next_level = "res://level/level_ENDE.tscn"
+next_level = "res://level/endscreen.tscn"
 
 [node name="Player" parent="." instance=ExtResource("4_tm686")]
 position = Vector2(64, 1200)

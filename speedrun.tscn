@@ -1,0 +1,19 @@
+[gd_scene load_steps=2 format=3 uid="uid://blbmmpxr61rwu"]
+
+[ext_resource type="Script" path="res://speedrun.gd" id="1_8spli"]
+
+[node name="Speedrun" type="CanvasLayer"]
+layer = 32
+script = ExtResource("1_8spli")
+
+[node name="Label" type="Label" parent="."]
+unique_name_in_owner = true
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -73.0
+offset_top = 8.0
+offset_right = -9.0
+offset_bottom = 31.0
+grow_horizontal = 0
+text = "00:00:00"

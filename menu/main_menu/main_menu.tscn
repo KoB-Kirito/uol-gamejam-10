@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://dn4dashthsf4l"]
+[gd_scene load_steps=26 format=3 uid="uid://dn4dashthsf4l"]
 
 [ext_resource type="Theme" uid="uid://c46na1j7c1bq" path="res://menu/theme.tres" id="1_xjn03"]
 [ext_resource type="Script" path="res://menu/main_menu/main_menu.gd" id="2_opjhm"]
@@ -10,6 +10,7 @@
 [ext_resource type="Texture2D" uid="uid://b66n8gnjjyvuf" path="res://menu/main_menu/blood.png" id="6_cuoid"]
 [ext_resource type="AudioStream" uid="uid://b251rvn015p7c" path="res://assets/sounds/Bogen schuss.wav" id="9_4x7km"]
 [ext_resource type="AudioStream" uid="uid://cmlepq7p72qvb" path="res://assets/sounds/Bazooka Explosion.wav" id="10_06xwc"]
+[ext_resource type="Texture2D" uid="uid://b2cjb3nejghp2" path="res://menu/main_menu/title.png" id="11_ar4e6"]
 
 [sub_resource type="Resource" id="Resource_7jpxi"]
 script = ExtResource("3_81j5b")
@@ -152,6 +153,17 @@ stream = ExtResource("9_4x7km")
 unique_name_in_owner = true
 stream = ExtResource("10_06xwc")
 
+[node name="Title" type="TextureRect" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+texture = ExtResource("11_ar4e6")
+
 [connection signal="mouse_entered" from="StartButton" to="." method="_on_start_button_mouse_entered"]
 [connection signal="mouse_exited" from="StartButton" to="." method="_on_start_button_mouse_exited"]
 [connection signal="pressed" from="StartButton" to="." method="_on_start_button_pressed"]
@@ -161,3 +173,4 @@ stream = ExtResource("10_06xwc")
 [connection signal="mouse_entered" from="ExitButton" to="." method="_on_exit_button_mouse_entered"]
 [connection signal="mouse_exited" from="ExitButton" to="." method="_on_exit_button_mouse_exited"]
 [connection signal="pressed" from="ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="gui_input" from="Title" to="." method="_on_title_gui_input"]
