@@ -17,6 +17,7 @@ extends CharacterBody2D
 
 @export_group("Investigation and senses")
 @export var canSee = true
+@export var noticesFootprints = true
 @export var blindnessRadius : float
 @export var investigationCooldown : float
 @export var randomSuspicionInterval : float

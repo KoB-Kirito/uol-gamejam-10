@@ -88,6 +88,9 @@ func _process(delta : float) -> void:
 	if playerSpotted:
 		on_player_detected()
 	
+	if !base_enemy.noticesFootprints:
+		return
+	
 	if get_tree() == null:
 		return
 	
