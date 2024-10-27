@@ -50,8 +50,8 @@ size = Vector2(44, 14)
 script = ExtResource("1_nvh88")
 bullet = ExtResource("2_y752r")
 knockback = 1000.0
-AimBounces = 10
-AimRange = 1000
+AimBounces = 20
+AimRange = 2000
 WeaponString = "gun"
 
 [node name="Sprite" type="Sprite2D" parent="."]
