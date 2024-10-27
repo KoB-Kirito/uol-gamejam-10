@@ -37,6 +37,6 @@ func update_path():
 func get_path_points() -> Array[Vector2]:
 	return pathPoints
 func get_wait_time(index : int) -> float:
-	if index >= waitTimes.size():
+	if index >= waitTimes.size() || waitTimes[index] == 0:
 		return -1
 	return waitTimes[index]
