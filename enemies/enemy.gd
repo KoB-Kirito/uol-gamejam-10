@@ -31,6 +31,7 @@ extends CharacterBody2D
 @onready var timer = $Timer
 @onready var turnTimer = $TurnTimer
 @onready var observTimer = $ObservTimer
+@onready var susTimer = $SusTimer
 
 var pathPoints : Array[Vector2]
 var curNode = 0
@@ -38,7 +39,6 @@ var advanceFlag = false
 var t = 0.0
 var canMove = true
 
-var susT = 0.0
 var rng = RandomNumberGenerator.new()
 
 var is_waiting = false
@@ -61,6 +61,7 @@ var current_direction: Vector2 = Vector2.ZERO
 var prevPosition : Vector2
 
 var observTimerDone = true
+var susTimerDone = true
 
 signal died(enemy: Enemy)
 
@@ -165,7 +166,33 @@ func _physics_process(delta: float) -> void:
 		
 		return
 	
-	if !canMove || is_waiting:
+	if !canMove && !is_investigating:
+		current_direction = Vector2.ZERO
+		
+		if is_turning:
+			return
+			
+		if !susTimerDone:
+			return
+		
+		var rnd = rng.randf()
+		if rnd < randomSuspicionChance:
+			return
+		
+		susTimerDone = false
+		
+		var angle = rng.randf_range(PI/2.0, PI)
+		if rng.randf() > .5:
+			angle *= -1
+		angle += global_rotation
+		turn(Vector2.from_angle(angle))
+		
+		susTimer.stop()
+		susTimer.start(randomSuspicionInterval)
+		
+		return
+	
+	if is_waiting:
 		current_direction = Vector2.ZERO
 		return
 	
@@ -184,10 +211,12 @@ func advance():
 	if nextNode >= pathPoints.size():
 		nextNode = 0
 	
-	var subPath = (pathPoints[nextNode] - pathPoints[curNode])
+	var subPath = Vector2(0,0)
 	
 	if is_investigating:
 		subPath = (curPOI - backtrackStack[backtrackStack.size() - 1])
+	elif canMove:
+		subPath = (pathPoints[nextNode] - pathPoints[curNode])
 	
 	turn(subPath)
 
@@ -216,8 +245,12 @@ func _on_timer_timeout() -> void:
 	timer.stop()
 	is_waiting = false
 	isObserving = false
+	
 	observTimer.stop()
 	observTimerDone = true
+	susTimer.stop()
+	susTimerDone = true
+	
 	is_turning = false
 	
 	if !is_returning:
@@ -262,10 +295,6 @@ func patrol(delta : float):
 	global_position = newPos
 	move_and_slide()
 	
-	susT += delta
-	if susT >= randomSuspicionInterval:
-		susT = 0.0
-		check_rand_suspicion()
 
 func investigateMove(delta : float):	
 	var mSpeed = moveSpeed
@@ -325,6 +354,8 @@ func investigate(pos : Vector2):
 	isObserving = false
 	observTimer.stop()
 	observTimerDone = true
+	susTimer.stop()
+	susTimerDone = true
 	
 	wait(newInvestigationPause)
 
@@ -347,14 +378,6 @@ func finish_investigation():
 	backtrackStack.clear()
 	
 	wait(finishInvestigationPause)
-	
-func check_rand_suspicion():
-	var rnd = rng.randf()
-	
-	if rnd > randomSuspicionChance:
-		return
-	
-	wait(randomSuspicionPause)
 
 func turn(desDir : Vector2):
 	var angleRad = acos(desDir.dot(Vector2(1,0)) / (desDir.length()))
@@ -378,3 +401,6 @@ func _on_observ_timer_timeout() -> void:
 	
 	if !isObserving:
 		return
+
+func _on_sus_timer_timeout() -> void:
+	susTimerDone = true
