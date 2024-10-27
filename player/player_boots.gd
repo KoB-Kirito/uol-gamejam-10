@@ -15,7 +15,7 @@ func _process(delta : float) -> void:
 	
 	if curDst >= dst_between:
 		var newPrints = footprints.instantiate()
-		get_tree().root.add_child(newPrints)
+		add_child(newPrints)
 		newPrints.global_position = global_position
 		curDst -= dst_between
 		

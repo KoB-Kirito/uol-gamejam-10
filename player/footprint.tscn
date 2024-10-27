@@ -4,6 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://ts0cimfv1f58" path="res://icon.svg" id="2_1s2ro"]
 
 [node name="Footprint" type="Node2D" node_paths=PackedStringArray("sprite") groups=["footprints"]]
+top_level = true
 script = ExtResource("1_uy0n8")
 lifetime = 5.0
 sprite = NodePath("Sprite")

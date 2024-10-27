@@ -31,7 +31,7 @@ func shoot(path:Array[Vector2]) -> bool:
 	animPlayer.play("shoot")
 	
 	var b = bullet.instantiate()
-	get_tree().root.add_child(b)
+	add_child(b)
 	b.position = tip.global_position
 	b.rotation = rotation
 	
