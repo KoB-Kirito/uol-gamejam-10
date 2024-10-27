@@ -155,6 +155,8 @@ visible = false
 
 [node name="TurnTimer" type="Timer" parent="."]
 
+[node name="SusTimer" type="Timer" parent="."]
+
 [node name="ObservTimer" type="Timer" parent="."]
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
@@ -175,4 +177,5 @@ autoplay = "right_idle"
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="TurnTimer" to="." method="_on_turn_timer_timeout"]
+[connection signal="timeout" from="SusTimer" to="." method="_on_turn_timer_timeout"]
 [connection signal="timeout" from="ObservTimer" to="." method="_on_observ_timer_timeout"]
