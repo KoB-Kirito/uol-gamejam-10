@@ -53,11 +53,11 @@ func UpdateAnimaiton(dir:Vector2):
 	var Playerstate="idle"
 	if dir.length() > 0:
 		Playerstate="run"
-	if gunstring!="bow":#no sprites for bow up/down
-		if dir.y<0:
-			stringDirection="up"
-		if dir.y>0:
-			stringDirection="down"
+		
+	if dir.y<0:
+		stringDirection="up"
+	if dir.y>0:
+		stringDirection="down"
 	if dir.x!=0:
 		stringDirection="side"
 		

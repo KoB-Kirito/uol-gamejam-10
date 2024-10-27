@@ -1,9 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://vr7mpxhvdbfh"]
+[gd_scene load_steps=7 format=3 uid="uid://vr7mpxhvdbfh"]
 
 [ext_resource type="PackedScene" uid="uid://ch3u4v7tets38" path="res://level_manager.tscn" id="1_lgun7"]
 [ext_resource type="PackedScene" uid="uid://d1nwfcr0d5o1x" path="res://player.tscn" id="2_8ujg3"]
 [ext_resource type="PackedScene" uid="uid://bvfwp4bvyktui" path="res://weapons/gun.tscn" id="3_m4j3d"]
-[ext_resource type="PackedScene" uid="uid://f4jf1c4v6ts5" path="res://enemies/_base_enemy.tscn" id="4_harid"]
 [ext_resource type="PackedScene" uid="uid://dl7hns1gsgxit" path="res://weapons/Bow.tscn" id="5_7vfgq"]
 [ext_resource type="Texture2D" uid="uid://ts0cimfv1f58" path="res://icon.svg" id="6_7q31o"]
 
@@ -24,16 +23,10 @@ acceleration = 0.4
 position = Vector2(-93, 217)
 AimRange = 500
 
-[node name="EnemyBase" parent="." instance=ExtResource("4_harid")]
-position = Vector2(457, 360)
-
 [node name="Bow" parent="." instance=ExtResource("5_7vfgq")]
 position = Vector2(-225, 148)
 AimBounces = 0
 AimRange = 300
-
-[node name="EnemyBase2" parent="." instance=ExtResource("4_harid")]
-position = Vector2(-59, 58)
 
 [node name="Node2D2" type="Node2D" parent="."]
 position = Vector2(-159, 28)

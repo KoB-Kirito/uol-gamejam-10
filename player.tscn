@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://d1nwfcr0d5o1x"]
+[gd_scene load_steps=36 format=3 uid="uid://d1nwfcr0d5o1x"]
 
 [ext_resource type="Script" path="res://character_body_2d.gd" id="1_5xmsr"]
 [ext_resource type="Texture2D" uid="uid://cn0sp58u03y2q" path="res://player/Sprites/Snipy_AU_Laufen_Seite.png" id="2_1vbb6"]
@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://c05m88dexdeib" path="res://player/Sprites/SP_AU_Vorne_Laufen2.png" id="3_1lrf5"]
 [ext_resource type="Texture2D" uid="uid://cqx7bng4i62tl" path="res://player/Sprites/Snipy_AU_Stehen_Seite.png" id="3_awduc"]
 [ext_resource type="Texture2D" uid="uid://b31q7h1p5m5ao" path="res://player/Sprites/NoWeapon_Run_Down1.png" id="3_dbw2v"]
-[ext_resource type="Texture2D" uid="uid://do8dbqs0nqetk" path="res://player/Sprites/Player_WithBow.png" id="3_kyjwm"]
 [ext_resource type="Texture2D" uid="uid://3uplvcyaw1s4" path="res://player/Sprites/NoWeapon_Run_Down2.png" id="4_07pp4"]
 [ext_resource type="Texture2D" uid="uid://cmcdr1fykx22v" path="res://player/Sprites/SP_Hinten_Laufen1.png" id="4_s0m3x"]
 [ext_resource type="Texture2D" uid="uid://gukgflh07u3g" path="res://player/Sprites/SP_AU_Vorne_Laufen3.png" id="4_tvovo"]
@@ -22,7 +21,16 @@
 [ext_resource type="Texture2D" uid="uid://crbnf1nfistry" path="res://player/Sprites/Snipey_laufend_ohne_Waffe.png" id="7_qblvm"]
 [ext_resource type="Texture2D" uid="uid://cqrtr8y4fwrbu" path="res://player/Sprites/NoWeapon_Run_Up2.png" id="8_atlnt"]
 [ext_resource type="Texture2D" uid="uid://chmvbdok4rie1" path="res://player/Sprites/SP_Hinten_Laufen2.png" id="9_sk4yy"]
+[ext_resource type="Texture2D" uid="uid://b4p5ud5sw8gk0" path="res://player/Sprites/bow_idle_down.png" id="10_g1p6f"]
 [ext_resource type="Texture2D" uid="uid://b486ur0wyaa3g" path="res://player/Sprites/SP_Hinten_Laufen3.png" id="10_h5pyh"]
+[ext_resource type="Texture2D" uid="uid://c63oxdmh5h1fr" path="res://player/Sprites/bow_idle_side.png" id="11_dfqk4"]
+[ext_resource type="Texture2D" uid="uid://dtq12yq3bmt1g" path="res://player/Sprites/bow_idle_up.png" id="12_ewmvg"]
+[ext_resource type="Texture2D" uid="uid://cfsg7d782mpdw" path="res://player/Sprites/bow_run_down1.png" id="13_4u3g4"]
+[ext_resource type="Texture2D" uid="uid://c1xrvcglql508" path="res://player/Sprites/bow_run_down2.png" id="14_fqg7d"]
+[ext_resource type="Texture2D" uid="uid://bxeeo37u0s50i" path="res://player/Sprites/bow_run_side1.png" id="15_nqpks"]
+[ext_resource type="Texture2D" uid="uid://ratie74drmdl" path="res://player/Sprites/bow_run_side2.png" id="16_lg7tc"]
+[ext_resource type="Texture2D" uid="uid://xwkxbpg80po" path="res://player/Sprites/bow_run_up1.png" id="17_ftjnd"]
+[ext_resource type="Texture2D" uid="uid://35irwofxrs" path="res://player/Sprites/bow_run_up2.png" id="18_wdv6i"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_nr6fr"]
 animations = [{
@@ -85,7 +93,15 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_kyjwm")
+"texture": ExtResource("10_g1p6f")
+}],
+"loop": true,
+"name": &"bow_idle_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("11_dfqk4")
 }],
 "loop": true,
 "name": &"bow_idle_side",
@@ -93,11 +109,44 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("3_kyjwm")
+"texture": ExtResource("12_ewmvg")
+}],
+"loop": true,
+"name": &"bow_idle_up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_4u3g4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_fqg7d")
+}],
+"loop": true,
+"name": &"bow_run_down",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("15_nqpks")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_lg7tc")
 }],
 "loop": true,
 "name": &"bow_run_side",
-"speed": 5.0
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("17_ftjnd")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_wdv6i")
+}],
+"loop": true,
+"name": &"bow_run_up",
+"speed": 8.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -176,7 +225,7 @@ aim = NodePath("Aim")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_nr6fr")
-animation = &"_run_side"
+animation = &"bow_run_up"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
