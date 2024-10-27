@@ -19,11 +19,9 @@ next_level = "res://level/level_2.tscn"
 position = Vector2(-64, 112)
 friction = 0.3
 acceleration = 0.4
-startWithWeapon = false
 
 [node name="Gun" parent="." instance=ExtResource("3_m4j3d")]
 position = Vector2(-93, 217)
-IsEquipped = false
 AimRange = 500
 
 [node name="EnemyBase" parent="." instance=ExtResource("4_harid")]
@@ -31,7 +29,6 @@ position = Vector2(457, 360)
 
 [node name="Bow" parent="." instance=ExtResource("5_7vfgq")]
 position = Vector2(-225, 148)
-IsEquipped = false
 AimBounces = 0
 AimRange = 300
 

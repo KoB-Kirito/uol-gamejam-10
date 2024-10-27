@@ -8,10 +8,10 @@ extends Node2D
 @onready var sprite := $Sprite
 @onready var area:= $Area2D
 
-@export var IsEquipped:bool
 @export var AimBounces:int
 @export var AimRange:int
 
+var IsEquipped:bool
 var hasBullet:bool=true
 var playerRef:Player=null
 
