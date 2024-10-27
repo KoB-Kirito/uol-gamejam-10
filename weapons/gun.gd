@@ -8,6 +8,7 @@ extends Node2D
 @onready var sprite := $Sprite
 @onready var area:= $Area2D
 @onready var shootsound: AudioStreamPlayer = $AudioStreamPlayer
+@onready var weapon_pick_up: AudioStreamPlayer = $WeaponPickUp
 
 
 @export var AimBounces:int
@@ -58,6 +59,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	PickUpWeapon(body)
 	
 func PickUpWeapon(body:Player):
+	weapon_pick_up.play()
 	sprite.visible=false
 	reparent(body)
 	position=Vector2(0,0)	
