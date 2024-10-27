@@ -31,7 +31,7 @@ friction = 0.3
 acceleration = 0.4
 
 [node name="Gun" parent="." instance=ExtResource("5_r16q4")]
-position = Vector2(300, 350)
+position = Vector2(750, 400)
 
 [node name="EnemyBase1" parent="." node_paths=PackedStringArray("path") instance=ExtResource("5_1ncph")]
 position = Vector2(380, 580)
@@ -40,10 +40,7 @@ path = NodePath("../Path1")
 
 [node name="EnemyBase2" parent="." instance=ExtResource("5_1ncph")]
 position = Vector2(700, 700)
-
-[node name="EnemyBase3" parent="." instance=ExtResource("5_1ncph")]
-position = Vector2(900, 500)
-rotation = 1.5708
+rotation = -0.785398
 
 [node name="Path1" type="Node2D" parent="." node_paths=PackedStringArray("pathNodesParent")]
 script = ExtResource("6_gngec")

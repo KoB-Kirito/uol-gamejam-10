@@ -22,7 +22,7 @@ tile_set = ExtResource("2_go0yr")
 
 [node name="LevelManager" parent="." instance=ExtResource("3_jgui6")]
 camBoundBotRight = Vector2(1280, 1280)
-next_level = "res://level/level_5.tscn"
+next_level = "res://level/level_4.5.tscn"
 
 [node name="Player" parent="." instance=ExtResource("4_s4p3j")]
 position = Vector2(400, 500)
