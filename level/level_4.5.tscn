@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://bibx8sxpe5gbi"]
+[gd_scene load_steps=9 format=4 uid="uid://bibx8sxpe5gbi"]
 
 [ext_resource type="TileSet" uid="uid://sij1top5ar0l" path="res://level/tileset_background.tres" id="1_hl51h"]
 [ext_resource type="TileSet" uid="uid://c7n2ro5k1kied" path="res://level/tileset.tres" id="2_l1yk8"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://bvfwp4bvyktui" path="res://weapons/gun.tscn" id="5_bv5x3"]
 [ext_resource type="PackedScene" uid="uid://f4jf1c4v6ts5" path="res://enemies/_base_enemy.tscn" id="6_yguoa"]
 [ext_resource type="Script" path="res://enemies/enemy_path.gd" id="7_1u1sc"]
+[ext_resource type="PackedScene" uid="uid://0pl8o5y53y1y" path="res://enemies/bones_enemy.tscn" id="7_jmann"]
 
 [node name="Level3" type="Node2D"]
 metadata/_edit_vertical_guides_ = [1280.0]
@@ -33,17 +34,15 @@ acceleration = 0.4
 [node name="Gun" parent="." instance=ExtResource("5_bv5x3")]
 position = Vector2(240, 800)
 
-[node name="EnemyBase" parent="." node_paths=PackedStringArray("path") instance=ExtResource("6_yguoa")]
+[node name="EnemyBase" parent="." instance=ExtResource("6_yguoa")]
 position = Vector2(608, 480)
 rotation = 1.5708
-path = NodePath("")
 defaultPatrolPause = 0.0
 
-[node name="EnemyBase2" parent="." node_paths=PackedStringArray("path") instance=ExtResource("6_yguoa")]
+[node name="EnemyBase2" parent="." node_paths=PackedStringArray("path") instance=ExtResource("7_jmann")]
 position = Vector2(768, 700)
 rotation = 1.5708
 path = NodePath("../Path2")
-defaultPatrolPause = 0.0
 
 [node name="Path2" type="Node2D" parent="." node_paths=PackedStringArray("pathNodesParent")]
 script = ExtResource("7_1u1sc")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://d3omqwtmj3r3f"]
+[gd_scene load_steps=9 format=4 uid="uid://d3omqwtmj3r3f"]
 
 [ext_resource type="TileSet" uid="uid://sij1top5ar0l" path="res://level/tileset_background.tres" id="1_ntrvv"]
 [ext_resource type="TileSet" uid="uid://c7n2ro5k1kied" path="res://level/tileset.tres" id="2_y10se"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://d1nwfcr0d5o1x" path="res://player.tscn" id="4_fc12v"]
 [ext_resource type="PackedScene" uid="uid://f4jf1c4v6ts5" path="res://enemies/_base_enemy.tscn" id="5_1cwf2"]
 [ext_resource type="PackedScene" uid="uid://dl7hns1gsgxit" path="res://weapons/Bow.tscn" id="5_tyrab"]
+[ext_resource type="PackedScene" uid="uid://0pl8o5y53y1y" path="res://enemies/bones_enemy.tscn" id="6_2w1so"]
 [ext_resource type="Script" path="res://enemies/enemy_path.gd" id="6_ehse8"]
 
 [node name="Level3" type="Node2D"]
@@ -33,11 +34,10 @@ acceleration = 0.4
 [node name="Bow" parent="." instance=ExtResource("5_tyrab")]
 position = Vector2(1130, 820)
 
-[node name="EnemyBase" parent="." node_paths=PackedStringArray("path") instance=ExtResource("5_1cwf2")]
+[node name="EnemyBase" parent="." node_paths=PackedStringArray("path") instance=ExtResource("6_2w1so")]
 position = Vector2(608, 650)
 rotation = 1.5708
 path = NodePath("../Path1")
-defaultPatrolPause = 0.0
 
 [node name="EnemyBase2" parent="." node_paths=PackedStringArray("path") instance=ExtResource("5_1cwf2")]
 position = Vector2(768, 980)

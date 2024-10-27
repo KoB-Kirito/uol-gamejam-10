@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://nx15d3k2yr32"]
+[gd_scene load_steps=8 format=4 uid="uid://nx15d3k2yr32"]
 
 [ext_resource type="TileSet" uid="uid://sij1top5ar0l" path="res://level/tileset_background.tres" id="1_3087e"]
 [ext_resource type="TileSet" uid="uid://c7n2ro5k1kied" path="res://level/tileset.tres" id="2_r4i3p"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://d1nwfcr0d5o1x" path="res://player.tscn" id="4_yqoif"]
 [ext_resource type="PackedScene" uid="uid://f4jf1c4v6ts5" path="res://enemies/_base_enemy.tscn" id="5_f5sia"]
 [ext_resource type="PackedScene" uid="uid://bvfwp4bvyktui" path="res://weapons/gun.tscn" id="5_wql2a"]
+[ext_resource type="PackedScene" uid="uid://0pl8o5y53y1y" path="res://enemies/bones_enemy.tscn" id="7_txcp0"]
 
 [node name="Level3" type="Node2D"]
 metadata/_edit_vertical_guides_ = [1280.0]
@@ -36,7 +37,7 @@ position = Vector2(500, 1040)
 position = Vector2(600, 500)
 rotation = 0.174533
 
-[node name="EnemyBase2" parent="." instance=ExtResource("5_f5sia")]
+[node name="EnemyBase2" parent="." instance=ExtResource("7_txcp0")]
 position = Vector2(800, 600)
 rotation = -1.39626
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=4 uid="uid://cljbuol3pci1n"]
+[gd_scene load_steps=9 format=4 uid="uid://cljbuol3pci1n"]
 
 [ext_resource type="TileSet" uid="uid://sij1top5ar0l" path="res://level/tileset_background.tres" id="1_eocc0"]
 [ext_resource type="TileSet" uid="uid://c7n2ro5k1kied" path="res://level/tileset.tres" id="2_s4t2p"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://d1nwfcr0d5o1x" path="res://player.tscn" id="4_tm686"]
 [ext_resource type="PackedScene" uid="uid://f4jf1c4v6ts5" path="res://enemies/_base_enemy.tscn" id="5_nw08o"]
 [ext_resource type="Script" path="res://enemies/enemy_path.gd" id="6_sby46"]
+[ext_resource type="PackedScene" uid="uid://0pl8o5y53y1y" path="res://enemies/bones_enemy.tscn" id="7_dx28e"]
 [ext_resource type="PackedScene" uid="uid://dl7hns1gsgxit" path="res://weapons/Bow.tscn" id="7_wc80a"]
 
 [node name="Level3" type="Node2D"]
@@ -40,14 +41,12 @@ path = NodePath("../Path1")
 
 [node name="EnemyBase2" parent="." node_paths=PackedStringArray("path") instance=ExtResource("5_nw08o")]
 position = Vector2(515, 700)
-rotation = 1.5708
 path = NodePath("../Path2")
 
-[node name="EnemyBase3" parent="." node_paths=PackedStringArray("path") instance=ExtResource("5_nw08o")]
+[node name="EnemyBase3" parent="." node_paths=PackedStringArray("path") instance=ExtResource("7_dx28e")]
 position = Vector2(800, 700)
 rotation = 3.14159
 path = NodePath("../Path3")
-moveSpeed = 55
 
 [node name="EnemyBase4" parent="." node_paths=PackedStringArray("path") instance=ExtResource("5_nw08o")]
 position = Vector2(1650, 800)
@@ -69,7 +68,7 @@ position = Vector2(230, 230)
 rotation = 3.14159
 path = NodePath("../Path7")
 
-[node name="EnemyBase8" parent="." instance=ExtResource("5_nw08o")]
+[node name="EnemyBase8" parent="." instance=ExtResource("7_dx28e")]
 position = Vector2(900, 1000)
 rotation = -2.35619
 
@@ -81,7 +80,7 @@ rotation = -2.61799
 position = Vector2(1100, 960)
 rotation = -1.0472
 
-[node name="EnemyBase11" parent="." instance=ExtResource("5_nw08o")]
+[node name="EnemyBase11" parent="." instance=ExtResource("7_dx28e")]
 position = Vector2(1380, 300)
 rotation = 1.309
 
@@ -96,7 +95,7 @@ path = NodePath("../Path13")
 [node name="Path1" type="Node2D" parent="." node_paths=PackedStringArray("pathNodesParent")]
 script = ExtResource("6_sby46")
 pathNodesParent = NodePath("Node2D")
-waitTimes = Array[float]([0.0, 0.0, 3.0, 0.0])
+waitTimes = Array[float]([0.1, 0.1, 3.0, 0.1])
 
 [node name="Node2D" type="Node2D" parent="Path1"]
 
@@ -115,7 +114,7 @@ position = Vector2(380, 960)
 [node name="Path2" type="Node2D" parent="." node_paths=PackedStringArray("pathNodesParent")]
 script = ExtResource("6_sby46")
 pathNodesParent = NodePath("Node2D")
-waitTimes = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
+waitTimes = Array[float]([0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1])
 isLooping = true
 
 [node name="Node2D" type="Node2D" parent="Path2"]
@@ -144,7 +143,7 @@ position = Vector2(800, 700)
 [node name="Path3" type="Node2D" parent="." node_paths=PackedStringArray("pathNodesParent")]
 script = ExtResource("6_sby46")
 pathNodesParent = NodePath("Node2D")
-waitTimes = Array[float]([0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0])
+waitTimes = Array[float]([0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1])
 isLooping = true
 
 [node name="Node2D" type="Node2D" parent="Path3"]
@@ -173,7 +172,7 @@ position = Vector2(800, 960)
 [node name="Path4" type="Node2D" parent="." node_paths=PackedStringArray("pathNodesParent")]
 script = ExtResource("6_sby46")
 pathNodesParent = NodePath("Node2D")
-waitTimes = Array[float]([0.0, 0.0, 0.0, 0.0])
+waitTimes = Array[float]([0.1, 0.1, 0.1, 0.1])
 isLooping = true
 
 [node name="Node2D" type="Node2D" parent="Path4"]
@@ -193,7 +192,7 @@ position = Vector2(1100, 800)
 [node name="Path5" type="Node2D" parent="." node_paths=PackedStringArray("pathNodesParent")]
 script = ExtResource("6_sby46")
 pathNodesParent = NodePath("Node2D")
-waitTimes = Array[float]([0.0, 0.0, 0.0, 0.0])
+waitTimes = Array[float]([0.1, 0.1, 0.1, 0.1])
 isLooping = true
 
 [node name="Node2D" type="Node2D" parent="Path5"]
@@ -213,7 +212,7 @@ position = Vector2(1450, 550)
 [node name="Path6" type="Node2D" parent="." node_paths=PackedStringArray("pathNodesParent")]
 script = ExtResource("6_sby46")
 pathNodesParent = NodePath("Node2D")
-waitTimes = Array[float]([0.0, 0.0])
+waitTimes = Array[float]([0.1, 0.1])
 isLooping = true
 
 [node name="Node2D" type="Node2D" parent="Path6"]
@@ -227,7 +226,7 @@ position = Vector2(930, 400)
 [node name="Path7" type="Node2D" parent="." node_paths=PackedStringArray("pathNodesParent")]
 script = ExtResource("6_sby46")
 pathNodesParent = NodePath("Node2D")
-waitTimes = Array[float]([0.0, 0.0])
+waitTimes = Array[float]([0.1, 0.1])
 isLooping = true
 
 [node name="Node2D" type="Node2D" parent="Path7"]
@@ -241,8 +240,7 @@ position = Vector2(340, 340)
 [node name="Path13" type="Node2D" parent="." node_paths=PackedStringArray("pathNodesParent")]
 script = ExtResource("6_sby46")
 pathNodesParent = NodePath("Node2D")
-waitTimes = Array[float]([0.0, 0.0, 0.0])
-isLooping = true
+waitTimes = Array[float]([0.1, 0.1, 0.1])
 
 [node name="Node2D" type="Node2D" parent="Path13"]
 
