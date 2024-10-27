@@ -36,6 +36,8 @@ position = Vector2(500, 1040)
 [node name="EnemyBase1" parent="." instance=ExtResource("5_f5sia")]
 position = Vector2(600, 500)
 rotation = 0.174533
+turnSpeed = 0.0
+randomSuspicionInterval = 0.0
 
 [node name="EnemyBase2" parent="." instance=ExtResource("7_txcp0")]
 position = Vector2(800, 600)
