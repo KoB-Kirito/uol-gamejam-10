@@ -7,6 +7,8 @@ extends Node2D
 @onready var animPlayer := $AnimationPlayer
 @onready var sprite := $Sprite
 @onready var area:= $Area2D
+@onready var shootsound: AudioStreamPlayer = $AudioStreamPlayer
+
 
 @export var AimBounces:int
 @export var AimRange:int
@@ -30,6 +32,7 @@ func shoot(path:Array[Vector2]) -> bool:
 		return false
 	animPlayer.stop()
 	animPlayer.play("shoot")
+	shootsound.play()
 	
 	var b = bullet.instantiate()
 	add_child(b)

@@ -1,7 +1,6 @@
 extends Bullet
 
 @onready var area: Area2D = $Area2D
-
 var IsTraveling:bool=true
 
 func _process(delta: float) -> void:
@@ -40,6 +39,7 @@ func dropArrow():
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	if IsTraveling:
 		if body is Enemy:
+			HitSound.play()
 			dropArrow()
 		return
 	if body is not Player:

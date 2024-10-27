@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bkmd2osothdin"]
+[gd_scene load_steps=6 format=3 uid="uid://bkmd2osothdin"]
 
 [ext_resource type="Script" path="res://weapons/Arrow.gd" id="1_kn546"]
 [ext_resource type="Texture2D" uid="uid://i3o82afe7yg0" path="res://weapons/Arrow.png" id="2_nq5ij"]
+[ext_resource type="AudioStream" uid="uid://bectenw0naluj" path="res://assets/sounds/Pfeil treffer.wav" id="3_6udlo"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d7y1m"]
 size = Vector2(29, 29)
@@ -32,5 +33,9 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("CircleShape2D_y7wc8")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_6udlo")
+volume_db = 10.0
 
 [connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

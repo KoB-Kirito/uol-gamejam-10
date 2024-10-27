@@ -1,10 +1,15 @@
-[gd_scene load_steps=4 format=3 uid="uid://b0re63ssao8id"]
+[gd_scene load_steps=7 format=3 uid="uid://b0re63ssao8id"]
 
 [ext_resource type="Script" path="res://weapons/bullet.gd" id="1_8hheb"]
 [ext_resource type="Texture2D" uid="uid://ts0cimfv1f58" path="res://icon.svg" id="1_e3f41"]
+[ext_resource type="AudioStream" uid="uid://caey2grxneaqb" path="res://assets/sounds/sniper treffer.wav" id="3_pshi2"]
+[ext_resource type="AudioStream" uid="uid://k5obx0032owl" path="res://assets/sounds/Sniper schuss abprall.wav" id="4_aythx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d7y1m"]
 size = Vector2(29, 29)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ux6b4"]
+radius = 25.0
 
 [node name="Bullet" type="CharacterBody2D"]
 top_level = true
@@ -22,3 +27,20 @@ texture = ExtResource("1_e3f41")
 position = Vector2(1, 1)
 scale = Vector2(0.953985, 1.06116)
 shape = SubResource("RectangleShape2D_d7y1m")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_ux6b4")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_pshi2")
+volume_db = 10.0
+
+[node name="ReboundSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_aythx")
+volume_db = 6.0
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]

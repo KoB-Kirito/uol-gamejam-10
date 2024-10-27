@@ -5,22 +5,26 @@ class_name Bullet
 var path : Array[Vector2]
 var totalDistances : Array[float]
 var totalDst : float
-
+@onready var HitSound: AudioStreamPlayer = $AudioStreamPlayer
+@onready var rebound_sound: AudioStreamPlayer = $ReboundSound
 @export var bulletSpeed = 200
 
 
+var newBegin = 0
 func _process(delta: float) -> void:
 	var speed = bulletSpeed * delta
 	var newDst = totalDst + speed
 	
-	var newBegin = 0
+	var tempNewBegin=0
 	for i in range(totalDistances.size()):		
 		if totalDistances[i] < newDst:
-			newBegin = i
+			if tempNewBegin !=i:
+				tempNewBegin = i	
 			continue
-		
 		break
-	
+	if tempNewBegin!=newBegin:
+		newBegin=tempNewBegin
+		rebound_sound.play()
 	
 	var end = newBegin + 1
 
@@ -43,4 +47,10 @@ func launch(path : Array[Vector2]):
 		var prev = totalDistances[i - 1]
 		var new = prev + (path[i] - path[i-1]).length()
 		totalDistances.append(new)
-	
+
+
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	if body is Enemy:
+		HitSound.play()
