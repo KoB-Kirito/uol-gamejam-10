@@ -36,14 +36,17 @@ func _process(delta : float) -> void:
 	debugLineLeft.default_color = Color.WHITE
 	debugLineRight.default_color = Color.WHITE
 	
-	if player == null:
+	if get_tree() == null || player == null:
 		player = get_tree().get_first_node_in_group(Global.playerGroup)
 		return
 		
 	var playerSpotted = try_see_object(player)
 	if playerSpotted:
 		on_player_detected()
-		
+	
+	if get_tree() == null:
+		return
+	
 	var footprints = get_tree().get_nodes_in_group(Global.footprintGroup)
 	
 	var youngest
