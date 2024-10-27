@@ -46,7 +46,7 @@ var is_turning = false
 
 var is_waiting = false
 
-var currentMotion : Vector2
+var current_direction: Vector2 = Vector2.ZERO
 var prevPosition : Vector2
 
 signal died(enemy: Enemy)
@@ -56,8 +56,6 @@ func _ready() -> void:
 		canMove = false
 		return
 	
-	currentMotion = Vector2(0,0)
-	
 	path.update_path()
 	pathPoints = path.get_path_points()
 	
@@ -65,8 +63,34 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	#TODO: animation
-	pass
+	# animation
+	
+	# get movement
+	var movement_type: String
+	if current_direction == Vector2.ZERO:
+		movement_type = "idle"
+		
+	else:
+		movement_type = "walk"
+	
+	# get direction
+	var direction: String
+	var r: float = global_rotation_degrees
+	match true:
+		_ when (r >= 45 and r < 135) or (r >= -315 and r < -225):
+			direction = "down"
+		
+		_ when abs(r) >= 135 and abs(r) < 225:
+			direction = "left"
+		
+		_ when (r >= 225 and r < 315) or (r >= -135 and r < -45):
+			direction = "up"
+			
+		_: # else
+			direction = "right"
+	
+	# play animation
+	%AnimatedSprite2D.play(direction + "_" + movement_type)
 
 
 func _physics_process(delta: float) -> void:
@@ -74,11 +98,11 @@ func _physics_process(delta: float) -> void:
 	%AnimatedSprite2D.position = position
 	
 	if !canMove || is_waiting:
-		currentMotion = Vector2(0,0)
+		current_direction = Vector2.ZERO
 		return
 	
 	if is_turning:
-		currentMotion = Vector2(0,0)
+		current_direction = Vector2.ZERO
 		
 		curRotation += delta * turnSpeed
 		
@@ -95,7 +119,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		patrol(delta)
 	
-	currentMotion = global_position - prevPosition
+	current_direction = prevPosition.direction_to(global_position)
 	prevPosition = global_position
 
 func advance():
