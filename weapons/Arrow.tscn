@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bkmd2osothdin"]
 
 [ext_resource type="Script" path="res://weapons/Arrow.gd" id="1_kn546"]
-[ext_resource type="Texture2D" uid="uid://ts0cimfv1f58" path="res://icon.svg" id="2_5xcp0"]
+[ext_resource type="Texture2D" uid="uid://i3o82afe7yg0" path="res://weapons/Arrow.png" id="2_nq5ij"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d7y1m"]
 size = Vector2(29, 29)
@@ -18,13 +18,12 @@ script = ExtResource("1_kn546")
 bulletSpeed = 800
 
 [node name="Arrow" type="Sprite2D" parent="."]
-modulate = Color(1, 0, 0, 1)
-scale = Vector2(0.295146, 0.307699)
-texture = ExtResource("2_5xcp0")
+texture_filter = 1
+scale = Vector2(3, 3)
+texture = ExtResource("2_nq5ij")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(1, 1)
-scale = Vector2(0.953985, 1.06116)
+scale = Vector2(1.5, 0.5)
 shape = SubResource("RectangleShape2D_d7y1m")
 
 [node name="Area2D" type="Area2D" parent="."]

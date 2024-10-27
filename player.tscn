@@ -1,11 +1,110 @@
-[gd_scene load_steps=10 format=3 uid="uid://d1nwfcr0d5o1x"]
+[gd_scene load_steps=21 format=3 uid="uid://d1nwfcr0d5o1x"]
 
 [ext_resource type="Script" path="res://character_body_2d.gd" id="1_5xmsr"]
-[ext_resource type="Texture2D" uid="uid://my0cdd0edkbv" path="res://Sprites/PlayerSprite.png" id="2_iugwe"]
+[ext_resource type="Texture2D" uid="uid://cn0sp58u03y2q" path="res://player/Sprites/Snipy_AU_Laufen_Seite.png" id="2_1vbb6"]
+[ext_resource type="Texture2D" uid="uid://bvg2igesrvlms" path="res://player/Sprites/Snipey_stehend_ohne_Waffe.png" id="2_6s35x"]
+[ext_resource type="Texture2D" uid="uid://my0cdd0edkbv" path="res://player/Sprites/PlayerSprite.png" id="2_iugwe"]
+[ext_resource type="Texture2D" uid="uid://dsyew0viqq3w2" path="res://player/Sprites/SP_AU_Vorne_Laufen1.png" id="2_s4gs4"]
+[ext_resource type="Texture2D" uid="uid://c05m88dexdeib" path="res://player/Sprites/SP_AU_Vorne_Laufen2.png" id="3_1lrf5"]
+[ext_resource type="Texture2D" uid="uid://cqx7bng4i62tl" path="res://player/Sprites/Snipy_AU_Stehen_Seite.png" id="3_awduc"]
+[ext_resource type="Texture2D" uid="uid://do8dbqs0nqetk" path="res://player/Sprites/Player_WithBow.png" id="3_kyjwm"]
+[ext_resource type="Texture2D" uid="uid://cmcdr1fykx22v" path="res://player/Sprites/SP_Hinten_Laufen1.png" id="4_s0m3x"]
+[ext_resource type="Texture2D" uid="uid://gukgflh07u3g" path="res://player/Sprites/SP_AU_Vorne_Laufen3.png" id="4_tvovo"]
 [ext_resource type="Script" path="res://aim.gd" id="4_ywamx"]
 [ext_resource type="Script" path="res://camera.gd" id="5_ln3gc"]
 [ext_resource type="Script" path="res://player/player_boots.gd" id="6_x72yt"]
 [ext_resource type="PackedScene" uid="uid://t67f5hvq5nio" path="res://player/footprint.tscn" id="7_o3oni"]
+[ext_resource type="Texture2D" uid="uid://chmvbdok4rie1" path="res://player/Sprites/SP_Hinten_Laufen2.png" id="9_sk4yy"]
+[ext_resource type="Texture2D" uid="uid://b486ur0wyaa3g" path="res://player/Sprites/SP_Hinten_Laufen3.png" id="10_h5pyh"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_nr6fr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_6s35x")
+}],
+"loop": true,
+"name": &"_idle_side",
+"speed": 5.0
+}, {
+"frames": [],
+"loop": true,
+"name": &"_run_side",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_kyjwm")
+}],
+"loop": true,
+"name": &"bow_idle_side",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_kyjwm")
+}],
+"loop": true,
+"name": &"bow_run_side",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_s4gs4")
+}],
+"loop": true,
+"name": &"gun_idle_down",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_iugwe")
+}],
+"loop": true,
+"name": &"gun_idle_side",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_s0m3x")
+}],
+"loop": true,
+"name": &"gun_idle_up",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_1lrf5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_tvovo")
+}],
+"loop": true,
+"name": &"gun_run_down",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_1vbb6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_awduc")
+}],
+"loop": true,
+"name": &"gun_run_side",
+"speed": 8.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("9_sk4yy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_h5pyh")
+}],
+"loop": true,
+"name": &"gun_run_up",
+"speed": 8.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ouvkn"]
 size = Vector2(32, 32)
@@ -24,8 +123,13 @@ collision_mask = 2
 script = ExtResource("1_5xmsr")
 aim = NodePath("Aim")
 
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_nr6fr")
+animation = &"bow_run_side"
+
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("2_iugwe")
+visible = false
+texture = ExtResource("3_awduc")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ouvkn")

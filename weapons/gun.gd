@@ -10,7 +10,7 @@ extends Node2D
 
 @export var AimBounces:int
 @export var AimRange:int
-
+@export var WeaponString:String
 var IsEquipped:bool
 var hasBullet:bool=true
 var playerRef:Player=null
@@ -55,6 +55,7 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	PickUpWeapon(body)
 	
 func PickUpWeapon(body:Player):
+	sprite.visible=false
 	reparent(body)
 	position=Vector2(0,0)	
 	body.gun=self
