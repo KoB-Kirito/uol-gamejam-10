@@ -20,6 +20,7 @@ var playerRef:Player=null
 
 func _unhandled_input(event: InputEvent) -> void:
 	if event.is_action_pressed("cheat"):
+		Speedrun.cheated()
 		Reload()
 
 func _physics_process(delta: float) -> void:
@@ -74,5 +75,6 @@ func PickUpWeapon(body:Player):
 	playerRef=body
 	
 func Reload():#Only used by Bow
-	hasBullet=true
-	playerRef.aim.setAimSettings(AimBounces,AimRange)
+	if playerRef:
+		hasBullet=true
+		playerRef.aim.setAimSettings(AimBounces,AimRange)

@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://d1nwfcr0d5o1x" path="res://player.tscn" id="4_tm686"]
 [ext_resource type="PackedScene" uid="uid://f4jf1c4v6ts5" path="res://enemies/_base_enemy.tscn" id="5_nw08o"]
 [ext_resource type="Script" path="res://enemies/enemy_path.gd" id="6_sby46"]
-[ext_resource type="PackedScene" uid="uid://0pl8o5y53y1y" path="res://enemies/bones_enemy.tscn" id="7_dx28e"]
+[ext_resource type="PackedScene" uid="uid://2680k3l0rerm" path="res://enemies/bones_enemy.tscn" id="7_dx28e"]
 [ext_resource type="PackedScene" uid="uid://dl7hns1gsgxit" path="res://weapons/Bow.tscn" id="7_wc80a"]
 
 [node name="Level3" type="Node2D"]

@@ -26,11 +26,24 @@ func stop() -> String:
 	return seconds2hhmmss((Time.get_ticks_msec() - start_time) / 1000.0)
 
 
+func cheated() -> void:
+	start_time -= 60000
+
+
 func _process(delta: float) -> void:
 	if not active:
 		return
 	
 	%Label.text = seconds2hhmmss((Time.get_ticks_msec() - start_time) / 1000.0)
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("speedrun"):
+		if visible:
+			hide()
+			
+		else:
+			show()
 
 
 func seconds2hhmmss(total_seconds: float) -> String:

@@ -20,6 +20,8 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_fgtng")
 scene_transition = SubResource("Resource_d28ck")
+stay_duration = 2.0
+fade_out_duration = 1.0
 
 [node name="GodotSplash" type="TextureRect" parent="."]
 layout_mode = 1

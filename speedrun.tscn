@@ -16,4 +16,4 @@ offset_top = 8.0
 offset_right = -9.0
 offset_bottom = 31.0
 grow_horizontal = 0
-text = "00:00:00"
+text = "Timer starts when you start the game"
