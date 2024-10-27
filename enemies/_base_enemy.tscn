@@ -106,6 +106,7 @@ collision_mask = 2
 script = ExtResource("1_cobw7")
 moveSpeed = 50
 turnSpeed = 1.0
+maxTurnTime = 7.0
 defaultPatrolPause = 4.0
 investigationDuration = 5.0
 newInvestigationPause = 0.5
@@ -114,6 +115,10 @@ randomSuspicionPause = 2.0
 blindnessRadius = 10.0
 investigationCooldown = 0.1
 randomSuspicionInterval = 5.0
+moveSpeedMultiplier = 2.0
+turnSpeedMultiplier = 2.0
+observingInterval = 2.0
+observingChance = 0.5
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 visible = false
@@ -148,6 +153,10 @@ visible = false
 
 [node name="Timer" type="Timer" parent="."]
 
+[node name="TurnTimer" type="Timer" parent="."]
+
+[node name="ObservTimer" type="Timer" parent="."]
+
 [node name="PointLight2D" type="PointLight2D" parent="."]
 rotation = 1.5708
 color = Color(1, 0, 0, 1)
@@ -165,3 +174,5 @@ frame_progress = 0.470962
 
 [connection signal="body_entered" from="Hurtbox" to="." method="_on_hurtbox_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="TurnTimer" to="." method="_on_turn_timer_timeout"]
+[connection signal="timeout" from="ObservTimer" to="." method="_on_observ_timer_timeout"]
