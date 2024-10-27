@@ -9,7 +9,6 @@ var totalDst : float
 @onready var rebound_sound: AudioStreamPlayer = $ReboundSound
 @export var bulletSpeed = 200
 
-
 var newBegin = 0
 func _process(delta: float) -> void:
 	var speed = bulletSpeed * delta
@@ -36,6 +35,7 @@ func _process(delta: float) -> void:
 	var newPos = (path[end] - path[newBegin]) * progress + path[newBegin]
 	
 	totalDst = totalDistances[newBegin] + (path[end] - path[newBegin]).length() * progress
+	rotation=(global_position-newPos).angle()
 	global_position = newPos
 	
 func launch(path : Array[Vector2]):

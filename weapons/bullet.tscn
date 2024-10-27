@@ -1,9 +1,24 @@
-[gd_scene load_steps=7 format=3 uid="uid://b0re63ssao8id"]
+[gd_scene load_steps=9 format=3 uid="uid://b0re63ssao8id"]
 
 [ext_resource type="Script" path="res://weapons/bullet.gd" id="1_8hheb"]
-[ext_resource type="Texture2D" uid="uid://ts0cimfv1f58" path="res://icon.svg" id="1_e3f41"]
+[ext_resource type="Texture2D" uid="uid://bpw31jcm1m2oy" path="res://weapons/Bullet_4.png" id="2_405m1"]
+[ext_resource type="Texture2D" uid="uid://cub1th3bmouen" path="res://weapons/Bullet_3.png" id="2_badp6"]
 [ext_resource type="AudioStream" uid="uid://caey2grxneaqb" path="res://assets/sounds/sniper treffer.wav" id="3_pshi2"]
 [ext_resource type="AudioStream" uid="uid://k5obx0032owl" path="res://assets/sounds/Sniper schuss abprall.wav" id="4_aythx"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_5s0di"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_badp6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_405m1")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_d7y1m"]
 size = Vector2(29, 29)
@@ -19,9 +34,11 @@ collision_mask = 21
 script = ExtResource("1_8hheb")
 bulletSpeed = 800
 
-[node name="Bullet" type="Sprite2D" parent="."]
-scale = Vector2(0.295146, 0.307699)
-texture = ExtResource("1_e3f41")
+[node name="Bullet" type="AnimatedSprite2D" parent="."]
+rotation = -1.5708
+scale = Vector2(6, 6)
+sprite_frames = SubResource("SpriteFrames_5s0di")
+autoplay = "default"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(1, 1)
