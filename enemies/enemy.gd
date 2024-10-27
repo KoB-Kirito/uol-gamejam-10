@@ -2,13 +2,24 @@ class_name Enemy
 extends CharacterBody2D
 ## base class
 
-@export var canSee = true
+@export_group("Movement")
 @export var path : EnemyPath
 @export var moveSpeed : int
 @export var turnSpeed : float
+
+@export_group("Waiting times")
+@export var defaultPatrolPause : float
+@export var investigationDuration : float
+@export var newInvestigationPause : float
+@export var finishInvestigationPause : float
+@export var randomSuspicionPause : float
+
+@export_group("Investigation and senses")
+@export var canSee = true
 @export var blindnessRadius : float
 @export var investigationCooldown : float
-@export var investigationDuration : float
+@export var randomSuspicionInterval : float
+@export var randomSuspicionChance : float
 
 @onready var timer = $Timer
 
@@ -17,6 +28,9 @@ var curNode = 0
 var advanceFlag = false
 var t = 0.0
 var canMove = true
+
+var susT = 0.0
+var rng = RandomNumberGenerator.new()
 
 var tInv = 0.0
 var cdInv = 0.0
@@ -29,6 +43,8 @@ var desRotation = 0.0
 var curRotation = 0.0
 var initRotation = 0.0
 var is_turning = false
+
+var is_waiting = false
 
 signal died(enemy: Enemy)
 
@@ -43,12 +59,10 @@ func _ready() -> void:
 	advance()
 
 func _process(delta: float) -> void:
-	if !canMove:
+	if !canMove || is_waiting:
 		return
 	
 	if is_turning:
-		#print(curRotation)
-		
 		curRotation += delta * turnSpeed
 		
 		global_rotation = rotate_toward(initRotation, desRotation, curRotation)
@@ -68,19 +82,15 @@ func advance():
 	advanceFlag = true
 	
 	var nextNode = (curNode + 1)
-	if nextNode >= pathPoints.size() - 1:
+	if nextNode >= pathPoints.size():
 		nextNode = 0
 	
 	var subPath = (pathPoints[nextNode] - pathPoints[curNode])
 	
-	var angleRad = acos(subPath.dot(Vector2(1,0)) / (subPath.length()))
-	if subPath.dot(Vector2(0,1)) < 0:
-		angleRad *= -1
-	desRotation = angleRad
+	if is_investigating:
+		subPath = (curPOI - backtrackStack[backtrackStack.size() - 1])
 	
-	is_turning = true
-	initRotation = global_rotation	
-	curRotation = 0.0
+	turn(subPath)
 
 func _on_hurtbox_body_entered(body: Node2D) -> void:
 	if body.is_in_group(Global.playerGroup):
@@ -98,10 +108,14 @@ func die() -> void:
 	died.emit(self)
 	queue_free()
 
+func wait(duration : float):
+	is_waiting = true
+	timer.start(duration)
+
 func _on_timer_timeout() -> void:
 	timer.stop()
+	is_waiting = false
 	advance()
-	pass # Replace with function body.
 
 func patrol(delta : float):
 	var flagCalled = false
@@ -117,7 +131,7 @@ func patrol(delta : float):
 		t += moveSpeed * delta
 	
 	var nextNode = (curNode + 1)
-	if nextNode >= pathPoints.size() - 1:
+	if nextNode >= pathPoints.size():
 		nextNode = 0
 	
 	var subPath = (pathPoints[nextNode] - pathPoints[curNode])
@@ -127,17 +141,21 @@ func patrol(delta : float):
 		t = 0.0
 		curNode = nextNode
 		
-		timer.start(path.get_wait_time(curNode))
+		var time = path.get_wait_time(curNode)
+		if time <= 0:
+			wait(defaultPatrolPause)
+		else:
+			wait(path.get_wait_time(curNode))
 		
 		return
 		
 	var newPos = pathPoints[curNode] + subPath.normalized() * t
 	global_position = newPos
 	
-	var angleRad = acos(subPath.dot(Vector2(1,0)) / (subPath.length()))
-	if subPath.dot(Vector2(0,1)) < 0:
-		angleRad *= -1
-	#global_rotation = angleRad
+	susT += delta
+	if susT >= randomSuspicionInterval:
+		susT = 0.0
+		check_rand_suspicion()
 
 func investigateMove(delta : float):
 	if cdInv > 0.0:
@@ -166,11 +184,6 @@ func investigateMove(delta : float):
 		
 	var newPos = backtrackStack[backtrackStack.size() - 1] + subPath.normalized() * tInv
 	global_position = newPos
-	
-	var angleRad = acos(subPath.dot(Vector2(1,0)) / (subPath.length()))
-	if subPath.dot(Vector2(0,1)) < 0:
-		angleRad *= -1
-	global_rotation = angleRad
 
 func investigate(pos : Vector2):
 	if cdInv > 0.0:
@@ -190,6 +203,11 @@ func investigate(pos : Vector2):
 	tInv = 0.0
 	
 	cdInv = investigationCooldown
+	
+	if is_turning:
+		is_turning = false
+	
+	wait(newInvestigationPause)
 
 func reach_investigation():
 	var oldPOI = curPOI
@@ -198,6 +216,8 @@ func reach_investigation():
 		
 	tInv = 0.0
 	is_returning = true
+	
+	wait(investigationDuration)
 
 func finish_investigation():
 	is_returning = false
@@ -205,3 +225,23 @@ func finish_investigation():
 	
 	backtrackStack.clear()
 	
+	wait(finishInvestigationPause)
+	
+func check_rand_suspicion():
+	var rnd = rng.randf()
+	
+	if rnd > randomSuspicionChance:
+		return
+	
+	wait(randomSuspicionPause)
+
+func turn(desDir : Vector2):
+	var angleRad = acos(desDir.dot(Vector2(1,0)) / (desDir.length()))
+	
+	if desDir.dot(Vector2(0,1)) < 0:
+		angleRad *= -1
+	desRotation = angleRad
+	
+	is_turning = true
+	initRotation = global_rotation
+	curRotation = 0.0

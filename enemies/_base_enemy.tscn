@@ -15,6 +15,16 @@ size = Vector2(32, 32)
 collision_layer = 2
 collision_mask = 2
 script = ExtResource("1_cobw7")
+moveSpeed = 50
+turnSpeed = 1.0
+defaultPatrolPause = 4.0
+investigationDuration = 5.0
+newInvestigationPause = 0.5
+finishInvestigationPause = 0.1
+randomSuspicionPause = 2.0
+blindnessRadius = 10.0
+investigationCooldown = 0.1
+randomSuspicionInterval = 5.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(1, 0, 0, 1)
@@ -42,10 +52,13 @@ debugLineRight = NodePath("Line2D Right")
 debugLineRay = NodePath("Line2D Ray")
 
 [node name="Line2D Left" type="Line2D" parent="Enemy Sight"]
+visible = false
 
 [node name="Line2D Right" type="Line2D" parent="Enemy Sight"]
+visible = false
 
 [node name="Line2D Ray" type="Line2D" parent="Enemy Sight"]
+visible = false
 default_color = Color(0.871789, 0.485318, 0.597971, 1)
 
 [node name="Timer" type="Timer" parent="."]

@@ -6,6 +6,7 @@ class_name EnemyPath
 @export var pathPoints : Array[Vector2]
 @export var waitTimes : Array[float]
 @export var debugLine : Line2D
+@export var isLooping : bool
 
 func _ready() -> void:
 	update_path()
@@ -18,7 +19,8 @@ func update_path():
 	for c in pathNodesParent.get_children():
 		pathPoints.append(c.global_position)
 	
-	pathPoints.append(pathPoints[0])
+	#pathPoints.append(pathPoints[0])
+	
 	
 	if debugLine == null:
 		return
@@ -28,4 +30,6 @@ func update_path():
 func get_path_points() -> Array[Vector2]:
 	return pathPoints
 func get_wait_time(index : int) -> float:
+	if index >= waitTimes.size():
+		return -1
 	return waitTimes[index]

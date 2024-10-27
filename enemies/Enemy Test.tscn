@@ -15,10 +15,16 @@ metadata/_edit_vertical_guides_ = [-198.0]
 
 [node name="EnemyBase" parent="." node_paths=PackedStringArray("path") instance=ExtResource("1_73apd")]
 position = Vector2(270, 94)
-rotation = -0.385718
+rotation = -0.153589
 path = NodePath("../Enemy Path")
-moveSpeed = 50
+defaultPatrolPause = 0.4
+investigationDuration = 5.0
+newInvestigationPause = 0.5
+finishInvestigationPause = 0.1
+randomSuspicionPause = 2.0
+blindnessRadius = 20.0
 investigationCooldown = 1.0
+randomSuspicionInterval = 5.0
 
 [node name="Enemy Path" type="Node2D" parent="." node_paths=PackedStringArray("pathNodesParent", "debugLine")]
 script = ExtResource("2_fhum7")
