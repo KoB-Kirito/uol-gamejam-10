@@ -22,11 +22,8 @@ func update_path():
 	#pathPoints.append(pathPoints[0])
 	
 	if !isLooping:
-		print("loop")
 		var size = pathPoints.size()
 		for i in range(1, size - 1):
-			print(i)
-			print(size - 1 - i)
 			pathPoints.append(pathPoints[size - 1 - i])
 	
 	if debugLine == null:

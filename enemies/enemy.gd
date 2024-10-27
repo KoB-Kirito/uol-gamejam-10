@@ -6,6 +6,7 @@ extends CharacterBody2D
 @export var path : EnemyPath
 @export var moveSpeed : int
 @export var turnSpeed : float
+@export var maxTurnTime : float
 
 @export_group("Waiting times")
 @export var defaultPatrolPause : float
@@ -21,7 +22,15 @@ extends CharacterBody2D
 @export var randomSuspicionInterval : float
 @export var randomSuspicionChance : float
 
+@export_group("On alert")
+@export var moveSpeedMultiplier : float
+@export var turnSpeedMultiplier : float
+@export var observingInterval : float
+@export var observingChance : float
+
 @onready var timer = $Timer
+@onready var turnTimer = $TurnTimer
+@onready var observTimer = $ObservTimer
 
 var pathPoints : Array[Vector2]
 var curNode = 0
@@ -31,6 +40,10 @@ var canMove = true
 
 var susT = 0.0
 var rng = RandomNumberGenerator.new()
+
+var is_waiting = false
+var isObserving = false
+var isOnAlert = false
 
 var tInv = 0.0
 var cdInv = 0.0
@@ -44,10 +57,10 @@ var curRotation = 0.0
 var initRotation = 0.0
 var is_turning = false
 
-var is_waiting = false
-
 var current_direction: Vector2 = Vector2.ZERO
 var prevPosition : Vector2
+
+var observTimerDone = true
 
 signal died(enemy: Enemy)
 
@@ -97,22 +110,64 @@ func _physics_process(delta: float) -> void:
 	#HACK: let sprite follow to keep rotation
 	%AnimatedSprite2D.position = position
 	
-	if !canMove || is_waiting:
-		current_direction = Vector2.ZERO
-		return
+	if cdInv > 0.0:
+		cdInv = max(0, cdInv - delta)
 	
 	if is_turning:
 		current_direction = Vector2.ZERO
 		
-		curRotation += delta * turnSpeed
+		var tSpeed = turnSpeed
+		if isOnAlert || isObserving:
+			tSpeed *= turnSpeedMultiplier
+		curRotation += delta * tSpeed
 		
 		global_rotation = rotate_toward(initRotation, desRotation, curRotation)
+
+		var iRP = initRotation
+		var dRP = desRotation
+		if initRotation < 0:
+			iRP = initRotation + (2*PI * (floor(-initRotation / (2*PI)) + 1))		
+		if desRotation < 0:
+			dRP = desRotation + (2*PI * (floor(-initRotation / (2*PI)) + 1))
 		
-		if curRotation >= abs(desRotation - initRotation):
+		var d = abs(dRP - iRP)
+		if d > 2*PI:
+			d -= 2*PI
+			
+		if curRotation >= d:
 			global_rotation = desRotation
 			is_turning = false
 		return
+	
+	if isObserving:
+		current_direction = Vector2.ZERO
 		
+		if is_turning:
+			return
+		
+		if !observTimerDone:
+			return
+		
+		var rnd = rng.randf()
+		if rnd < observingChance:
+			return
+		
+		observTimerDone = false
+		
+		var angle = rng.randf_range(PI/2.0, PI)
+		if rng.randf() > .5:
+			angle *= -1
+		angle += global_rotation
+		turn(Vector2.from_angle(angle))
+		
+		observTimer.stop()
+		observTimer.start(observingInterval)
+		
+		return
+	
+	if !canMove || is_waiting:
+		current_direction = Vector2.ZERO
+		return
 	
 	if is_investigating:
 		investigateMove(delta)
@@ -160,7 +215,16 @@ func wait(duration : float):
 func _on_timer_timeout() -> void:
 	timer.stop()
 	is_waiting = false
-	advance()
+	isObserving = false
+	observTimer.stop()
+	observTimerDone = true
+	is_turning = false
+	
+	if !is_returning:
+		advance()
+	else:
+		var subPath = (curPOI - backtrackStack[backtrackStack.size() - 1])
+		turn(subPath)
 
 func patrol(delta : float):
 	var flagCalled = false
@@ -203,11 +267,11 @@ func patrol(delta : float):
 		susT = 0.0
 		check_rand_suspicion()
 
-func investigateMove(delta : float):
-	if cdInv > 0.0:
-		cdInv = max(0, cdInv - delta)
-	
-	tInv += moveSpeed * delta
+func investigateMove(delta : float):	
+	var mSpeed = moveSpeed
+	if isOnAlert:
+		mSpeed *= moveSpeedMultiplier
+	tInv += mSpeed * delta
 	
 	var subPath = (curPOI - backtrackStack[backtrackStack.size() - 1])
 	
@@ -226,7 +290,10 @@ func investigateMove(delta : float):
 		backtrackStack.append(oldPOI)
 		
 		tInv = 0.0
-		wait(.2)
+		
+		subPath = (curPOI - backtrackStack[backtrackStack.size() - 1])
+		turn(subPath)
+		
 		return
 		
 	var newPos = backtrackStack[backtrackStack.size() - 1] + subPath.normalized() * tInv
@@ -254,6 +321,11 @@ func investigate(pos : Vector2):
 	if is_turning:
 		is_turning = false
 	
+	isOnAlert = true
+	isObserving = false
+	observTimer.stop()
+	observTimerDone = true
+	
 	wait(newInvestigationPause)
 
 func reach_investigation():
@@ -264,6 +336,8 @@ func reach_investigation():
 	tInv = 0.0
 	is_returning = true
 	
+	isOnAlert = false
+	isObserving = true
 	wait(investigationDuration)
 
 func finish_investigation():
@@ -292,3 +366,15 @@ func turn(desDir : Vector2):
 	is_turning = true
 	initRotation = global_rotation
 	curRotation = 0.0
+	
+	turnTimer.stop()
+	turnTimer.start(maxTurnTime)
+
+func _on_turn_timer_timeout() -> void:
+	is_turning = false
+
+func _on_observ_timer_timeout() -> void:
+	observTimerDone = true
+	
+	if !isObserving:
+		return
