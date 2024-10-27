@@ -35,6 +35,8 @@ position = Vector2(450, 1030)
 
 [node name="EnemyBase1" parent="." instance=ExtResource("5_7djl7")]
 position = Vector2(600, 600)
+noticesFootprints = false
 
 [node name="EnemyBase2" parent="." instance=ExtResource("7_wc1m8")]
 position = Vector2(870, 870)
+noticesFootprints = false

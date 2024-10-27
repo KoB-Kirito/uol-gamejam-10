@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=4 uid="uid://do4qm1rq3jl36"]
+[gd_scene load_steps=8 format=4 uid="uid://do4qm1rq3jl36"]
 
 [ext_resource type="TileSet" uid="uid://sij1top5ar0l" path="res://level/tileset_background.tres" id="1_74yu5"]
 [ext_resource type="TileSet" uid="uid://c7n2ro5k1kied" path="res://level/tileset.tres" id="2_x0t43"]
 [ext_resource type="PackedScene" uid="uid://ch3u4v7tets38" path="res://level_manager.tscn" id="3_4ticq"]
 [ext_resource type="PackedScene" uid="uid://d1nwfcr0d5o1x" path="res://player.tscn" id="4_q6t4u"]
+[ext_resource type="PackedScene" uid="uid://dl7hns1gsgxit" path="res://weapons/Bow.tscn" id="5_6m0lj"]
 [ext_resource type="PackedScene" uid="uid://f4jf1c4v6ts5" path="res://enemies/_base_enemy.tscn" id="5_cfagj"]
 [ext_resource type="Script" path="res://enemies/enemy_path.gd" id="6_dwoct"]
 
@@ -22,12 +23,15 @@ tile_set = ExtResource("2_x0t43")
 
 [node name="LevelManager" parent="." instance=ExtResource("3_4ticq")]
 camBoundBotRight = Vector2(1280, 1280)
-next_level = "res://level/level_1.tscn"
+next_level = "res://level/level_10.tscn"
 
 [node name="Player" parent="." instance=ExtResource("4_q6t4u")]
 position = Vector2(370, 800)
 friction = 0.3
 acceleration = 0.4
+
+[node name="Bow" parent="." instance=ExtResource("5_6m0lj")]
+position = Vector2(370, 640)
 
 [node name="EnemyBase" parent="." node_paths=PackedStringArray("path") instance=ExtResource("5_cfagj")]
 position = Vector2(320, 352)
@@ -55,7 +59,7 @@ defaultPatrolPause = 0.0
 [node name="Path1" type="Node2D" parent="." node_paths=PackedStringArray("pathNodesParent")]
 script = ExtResource("6_dwoct")
 pathNodesParent = NodePath("Node2D")
-waitTimes = Array[float]([0.0, 0.0, 999.0])
+waitTimes = Array[float]([0.0, 0.0, 5.0])
 
 [node name="Node2D" type="Node2D" parent="Path1"]
 
@@ -71,7 +75,7 @@ position = Vector2(540, 416)
 [node name="Path2" type="Node2D" parent="." node_paths=PackedStringArray("pathNodesParent")]
 script = ExtResource("6_dwoct")
 pathNodesParent = NodePath("Node2D")
-waitTimes = Array[float]([0.0, 0.0, 999.0])
+waitTimes = Array[float]([0.0, 0.0, 5.0])
 
 [node name="Node2D" type="Node2D" parent="Path2"]
 
@@ -87,7 +91,7 @@ position = Vector2(640, 608)
 [node name="Path3" type="Node2D" parent="." node_paths=PackedStringArray("pathNodesParent")]
 script = ExtResource("6_dwoct")
 pathNodesParent = NodePath("Node2D")
-waitTimes = Array[float]([0.0, 0.0, 0.0, 999.0])
+waitTimes = Array[float]([0.0, 0.0, 0.0, 5.0])
 
 [node name="Node2D" type="Node2D" parent="Path3"]
 
@@ -106,7 +110,7 @@ position = Vector2(540, 540)
 [node name="Path4" type="Node2D" parent="." node_paths=PackedStringArray("pathNodesParent")]
 script = ExtResource("6_dwoct")
 pathNodesParent = NodePath("Node2D")
-waitTimes = Array[float]([0.0, 0.0, 999.0])
+waitTimes = Array[float]([0.0, 0.0, 5.0])
 
 [node name="Node2D" type="Node2D" parent="Path4"]
 
