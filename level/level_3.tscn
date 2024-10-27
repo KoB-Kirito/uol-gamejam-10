@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=4 uid="uid://becpcnhca0yd3"]
+[gd_scene load_steps=7 format=4 uid="uid://becpcnhca0yd3"]
 
 [ext_resource type="TileSet" uid="uid://sij1top5ar0l" path="res://level/tileset_background.tres" id="1_n8odb"]
 [ext_resource type="TileSet" uid="uid://c7n2ro5k1kied" path="res://level/tileset.tres" id="2_2c3p3"]
 [ext_resource type="PackedScene" uid="uid://ch3u4v7tets38" path="res://level_manager.tscn" id="3_jgui6"]
 [ext_resource type="PackedScene" uid="uid://d1nwfcr0d5o1x" path="res://player.tscn" id="4_s4p3j"]
 [ext_resource type="PackedScene" uid="uid://f4jf1c4v6ts5" path="res://enemies/_base_enemy.tscn" id="5_7djl7"]
+[ext_resource type="PackedScene" uid="uid://bvfwp4bvyktui" path="res://weapons/gun.tscn" id="6_rssaq"]
 
 [node name="Level2" type="Node2D"]
 metadata/_edit_vertical_guides_ = [1280.0]
@@ -26,6 +27,10 @@ next_level = "res://level/level_4.tscn"
 position = Vector2(375, 1097)
 friction = 0.3
 acceleration = 0.4
+
+[node name="Gun" parent="." instance=ExtResource("6_rssaq")]
+z_index = -20
+position = Vector2(450, 1030)
 
 [node name="EnemyBase1" parent="." instance=ExtResource("5_7djl7")]
 position = Vector2(600, 600)
